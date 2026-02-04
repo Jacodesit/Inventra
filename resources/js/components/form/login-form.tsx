@@ -2,7 +2,13 @@ import { Mail } from 'lucide-react';
 import { FileLock } from 'lucide-react';
 import { LogIn } from 'lucide-react';
 
+import { useState } from 'react';
+
+import Signup from '../modal/signup-modal';
+
 export default function LoginForm() {
+    const [openModal, setOpenModal] = useState(false);
+
     return (
         <div>
             <form className='flex flex-col gap-3'>
@@ -45,25 +51,30 @@ export default function LoginForm() {
                         />
                     </div>
                 </div>
-
-                <div className='mt-2 flex flex-col gap-10 text-center'>
-                    <button
-                        className='border w-full p-3 rounded-lg flex items-center justify-center gap-1 font-semibold transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer'
-                    >
-                        Login
-                        <LogIn strokeWidth={2} size={18} />
-                    </button>
-
-                    <p className='text-xs'>No account yet?
-                        <button
-                            className='px-1 text-red-500 cursor-pointer transition-all duration-300 hover:font-medium'
-                        >
-                            Sign up
-                        </button>
-                        now!
-                    </p>
-                </div>
             </form>
+            <div className='mt-2 flex flex-col gap-10 text-center'>
+                <button
+                    className='border w-full p-3 rounded-lg flex items-center justify-center gap-1 font-semibold transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer'
+                >
+                    Login
+                    <LogIn strokeWidth={2} size={18} />
+                </button>
+
+                <p className='text-xs'>No account yet?
+                    <button
+                        onClick={() => setOpenModal(true)}
+                        className='px-1 text-red-500 cursor-pointer transition-all duration-300 hover:underline'
+                    >
+                        Sign up
+                    </button>
+                    now!
+                </p>
+            </div>
+
+            <Signup
+                openModal={openModal}
+                onClose={() => setOpenModal(false)}
+            />
         </div>
     )
 }

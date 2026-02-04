@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -62,5 +63,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function getCategoriesOptions() {
+        $options = Category::all();
+        return inertia('welcome', [
+            'categories' => $options
+        ]);
     }
 }
