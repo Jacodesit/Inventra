@@ -3,7 +3,7 @@ import SidebarLinks from "../links/sidebar-links"
 
 export default function Sidebar() {
     return (
-        <aside className="bg-sidebar-color h-screen w-64 text-white">
+        <aside className="bg-sidebar-color h-screen w-72 text-white">
             <div className="flex flex-col gap-5">
                 <SidebarHeading />
                 <SidebarLinks />

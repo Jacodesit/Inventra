@@ -40,8 +40,8 @@ export default function SignUpForm() {
                             placeholder="John Doe"
                             className="border w-full p-2.5 rounded"
                         />
+                        {errors.name && <p className="errors text-xs text-red-700">{errors.name}</p>}
                     </div>
-                    {errors.name && <p className="errors text-xs text-red-700">{errors.name}</p>}
 
                     <div className="flex flex-col gap-1">
                         <label
@@ -57,8 +57,8 @@ export default function SignUpForm() {
                             placeholder="johndoe@gmail.com"
                             className="border w-full p-2.5 rounded"
                         />
+                        {errors.email && <p className="errors text-xs text-red-700">{errors.email}</p>}
                     </div>
-                    {errors.email && <p className="errors text-xs text-red-700">{errors.email}</p>}
                 </div>
 
                 <div className="flex flex-col gap-1">
@@ -84,8 +84,8 @@ export default function SignUpForm() {
                             </option>
                         ))}
                     </select>
+                    {errors.category && <p className="errors text-xs text-red-700">{errors.category}</p>}
                 </div>
-                {errors.category && <p className="errors text-xs text-red-700">{errors.category}</p>}
 
                 <div className="grid grid-cols-2 gap-2">
                     <div className="flex flex-col gap-1">
@@ -102,8 +102,8 @@ export default function SignUpForm() {
                             placeholder="Enter password"
                             className="border w-full p-2.5 rounded"
                         />
+                        {errors.password && <p className="errors text-xs text-red-700">{errors.password}</p>}
                     </div>
-                    {errors.password && <p className="errors text-xs text-red-700">{errors.password}</p>}
 
                     <div className="flex flex-col gap-1">
                         <label
@@ -119,8 +119,8 @@ export default function SignUpForm() {
                             placeholder="Confirm password"
                             className="border w-full p-2.5 rounded"
                         />
+                        {errors.password_confirmation && <p className="errors text-xs text-red-700">{errors.password_confirmation}</p>}
                     </div>
-                    {errors.password_confirmation && <p className="errors text-xs text-red-700">{errors.password_confirmation}</p>}
                 </div>
 
                 <div className="flex justify-end pt-5 text-sm">
