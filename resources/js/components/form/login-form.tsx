@@ -1,3 +1,5 @@
+import { useForm } from '@inertiajs/react';
+
 import { Mail } from 'lucide-react';
 import { FileLock } from 'lucide-react';
 import { LogIn } from 'lucide-react';
@@ -8,10 +10,18 @@ import Signup from '../modal/signup-modal';
 
 export default function LoginForm() {
     const [openModal, setOpenModal] = useState(false);
+    const { data, post, setData, errors, processing } = useForm({
+        email: '',
+        password: ''
+    })
 
+    const submit = (e:React.FormEvent) => {
+        e.preventDefault();
+        post('/login');
+    }
     return (
         <div>
-            <form className='flex flex-col gap-3'>
+            <form className='flex flex-col gap-3' onSubmit={submit}>
                 <div>
                     <label
                         htmlFor="email"
@@ -26,10 +36,13 @@ export default function LoginForm() {
 
                         <input
                             type="email"
+                            value={data.email}
+                            onChange={(e) => setData('email', e.target.value)}
                             placeholder='johndoe@gmail.com'
                             className='w-full py-4 focus:outline-none text-sm pl-3'
                         />
                     </div>
+                    {errors.email && <p className='errors text-xs text-red-800'>{errors.email}</p>}
                 </div>
 
                 <div>
@@ -46,30 +59,34 @@ export default function LoginForm() {
 
                         <input
                             type="password"
+                            value={data.password}
+                            onChange={(e) => setData('password', e.target.value)}
                             placeholder='Password'
                             className='w-full py-4 focus:outline-none text-sm pl-3'
                         />
                     </div>
+                    {errors.password && <p className='errors text-xs text-red-800'>{errors.password}</p>}
+                </div>
+
+                <div className='mt-2 flex flex-col gap-10 text-center'>
+                    <button
+                        className='border w-full p-3 rounded-lg flex items-center justify-center gap-1 font-semibold transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer'
+                    >
+                        {processing ? 'Logging in...' : 'Log In'}
+                        <LogIn strokeWidth={2} size={18} />
+                    </button>
+
+                    <p className='text-xs'>No account yet?
+                        <button
+                            onClick={() => setOpenModal(true)}
+                            className='px-1 text-red-500 cursor-pointer transition-all duration-300 hover:underline'
+                        >
+                            Sign up
+                        </button>
+                        now!
+                    </p>
                 </div>
             </form>
-            <div className='mt-2 flex flex-col gap-10 text-center'>
-                <button
-                    className='border w-full p-3 rounded-lg flex items-center justify-center gap-1 font-semibold transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer'
-                >
-                    Login
-                    <LogIn strokeWidth={2} size={18} />
-                </button>
-
-                <p className='text-xs'>No account yet?
-                    <button
-                        onClick={() => setOpenModal(true)}
-                        className='px-1 text-red-500 cursor-pointer transition-all duration-300 hover:underline'
-                    >
-                        Sign up
-                    </button>
-                    now!
-                </p>
-            </div>
 
             <Signup
                 openModal={openModal}

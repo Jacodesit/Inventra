@@ -122,16 +122,18 @@ export default function SignUpForm() {
                     </div>
                     {errors.password_confirmation && <p className="errors text-xs text-red-700">{errors.password_confirmation}</p>}
                 </div>
+
+                <div className="flex justify-end pt-5 text-sm">
+                    <button
+                        disabled={processing}
+                        className="px-6 py-2 border rounded transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer"
+                    >
+                        {processing ? 'Signing Up...' : 'Sign Up'}
+                    </button>
+                </div>
             </form>
 
-            <div className="flex justify-end pt-5 text-sm">
-                <button
-                    disabled={processing}
-                    className="px-6 py-2 border rounded transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer"
-                >
-                    {processing ? 'Signing Up...' : 'Sign Up'}
-                </button>
-            </div>
+
         </div>
     )
 }
