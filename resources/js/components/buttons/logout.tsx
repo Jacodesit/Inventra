@@ -26,12 +26,11 @@ export default function Logout({openSidebar}:pageProps) {
                         <span>Logout</span>
                     </div>
                 ) : (
-                    <div>
+                    <div title="Logout">
                         <LogOut animateOnHover size={18} />
                     </div>
                 )}
             </button>
         </div>
-
     )
 }

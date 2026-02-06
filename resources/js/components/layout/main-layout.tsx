@@ -5,13 +5,23 @@ type PageProps = {
     children: React.ReactNode
 }
 export default function Layout({children}:PageProps) {
-    const [openSidebar, setOpenSidebar] = useState(false);
+    const [openSidebar, setOpenSidebar] = useState(() => {
+        const saved = localStorage.getItem("sidebar");
+        return saved === "true";
+    });
+
+    const handleToggle = () => {
+        setOpenSidebar(prev => {
+            localStorage.setItem("sidebar", (!prev).toString());
+            return !prev;
+        });
+    };
 
     return (
         <div className="flex">
             <Sidebar
                 openSidebar={openSidebar}
-                setOpenSidebar={setOpenSidebar}
+                setOpenSidebar={handleToggle}
             />
             <main className="flex-1">
                 {children}

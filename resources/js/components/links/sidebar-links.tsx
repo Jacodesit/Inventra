@@ -16,11 +16,11 @@ export default function SidebarLinks({openSidebar}:pageProps) {
     const currentUrl = window.location.pathname;
 
     const links = [
-        { name: 'Dashboard', icon: <LayoutDashboard animateOnHover size={18} />, href: '/dashboard' },
-        { name: 'Products', icon: <Blocks animateOnHover size={18} />, href: '/products' },
-        { name: 'Categories', icon: <Layers animateOnHover size={18} />, href: '/categories' },
-        { name: 'Stock', icon: <ChartBar animateOnHover size={18} />, href: '/stock' },
-        { name: 'Reports', icon: <MessageSquareText animateOnHover size={18} />, href: '/reports' },
+        { name: 'Dashboard', icon: <LayoutDashboard animateOnHover size={18} />, href: '/dashboard', title: 'Dashboard' },
+        { name: 'Products', icon: <Blocks animateOnHover size={18} />, href: '/products', title: 'Products' },
+        { name: 'Categories', icon: <Layers animateOnHover size={18} />, href: '/categories', title: 'Categories' },
+        { name: 'Stock', icon: <ChartBar animateOnHover size={18} />, href: '/stock', title: 'Stock' },
+        { name: 'Reports', icon: <MessageSquareText animateOnHover size={18} />, href: '/reports', title: 'Reports' },
     ]
 
     return (
@@ -31,14 +31,14 @@ export default function SidebarLinks({openSidebar}:pageProps) {
                         key={link.name}
                         href={link.href}
                     >
-                        <div className={`flex items-center px-8 py-4 gap-1 transition-all duration-400 hover:bg-gray-800 ${currentUrl === link.href ? 'bg-gray-900 text-white' : ''}`}>
+                        <div className={`flex items-center px-8 py-4 gap-1 transition-all duration-300 hover:bg-gray-800 ${currentUrl === link.href ? 'bg-gray-900 text-white' : ''}`}>
                             {!openSidebar ? (
                                 <div className="flex items-center gap-1">
                                     <span className="">{link.icon}</span>
                                     <span className="">{link.name}</span>
                                 </div>
                             ) : (
-                                <span className="block">{link.icon}</span>
+                                <span className="block" title={link.title}>{link.icon}</span>
                             )}
                         </div>
                     </Link>
@@ -49,4 +49,3 @@ export default function SidebarLinks({openSidebar}:pageProps) {
     )
 }
 
-// flex items-center px-8 py-4 gap-1 transition-all duration-400 hover:bg-gray-800
