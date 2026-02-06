@@ -8,7 +8,11 @@ import { MessageSquareText } from '../../../../components/animate-ui/icons/messa
 
 import Logout from "../buttons/logout";
 
-export default function SidebarLinks() {
+type pageProps = {
+    openSidebar: boolean
+}
+
+export default function SidebarLinks({openSidebar}:pageProps) {
     const currentUrl = window.location.pathname;
 
     const links = [
@@ -28,14 +32,19 @@ export default function SidebarLinks() {
                         href={link.href}
                     >
                         <div className={`flex items-center px-8 py-4 gap-1 transition-all duration-400 hover:bg-gray-800 ${currentUrl === link.href ? 'bg-gray-900 text-white' : ''}`}>
-                            {link.icon}
-                            {link.name}
+                            {!openSidebar ? (
+                                <div className="flex items-center gap-1">
+                                    <span className="">{link.icon}</span>
+                                    <span className="">{link.name}</span>
+                                </div>
+                            ) : (
+                                <span className="block">{link.icon}</span>
+                            )}
                         </div>
                     </Link>
                 ))}
             </div>
-
-            <Logout />
+            <Logout openSidebar={openSidebar}/>
         </nav>
     )
 }
