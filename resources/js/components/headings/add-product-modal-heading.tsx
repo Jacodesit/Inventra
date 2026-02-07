@@ -1,18 +1,19 @@
-import { UserPlus } from 'lucide-react';
+import { PackagePlus } from 'lucide-react';
 import { CircleX } from "../../../../components/animate-ui/icons/circle-x";
 
 type pageProps = {
     onClose: () => void;
 }
 
-export default function SignUpHeading({onClose}: pageProps) {
-    const headline = 'Create your account'
-    const subtext = 'Sign up to get started managing your inventory.'
+export default function AddProductHeading({onClose}: pageProps) {
+    const headline = 'Add New Item';
+    const subtext =  'Keep your inventory updated in seconds.'
+
     return (
         <header className="px-4 py-3">
             <div className='flex justify-between'>
                 <div className='inline-flex items-center bg-black p-4 rounded-lg'>
-                    <UserPlus className='text-white h-6'/>
+                    <PackagePlus className='text-white h-6'/>
                 </div>
 
                 <CircleX

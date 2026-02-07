@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::latest()->get();
+        $categories = Category::all();
+
+        return Inertia::render('Mainpages/products', [
+            'products' => $products,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -63,12 +70,5 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
-    }
-
-    public function getCategoriesOptions() {
-        $options = Category::all();
-        return inertia('welcome', [
-            'categories' => $options
-        ]);
     }
 }

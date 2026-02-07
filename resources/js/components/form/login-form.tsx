@@ -20,7 +20,7 @@ export default function LoginForm() {
         post('/login');
     }
     return (
-        <div>
+        <div className='flex flex-col gap-10'>
             <form className='flex flex-col gap-3' onSubmit={submit}>
                 <div>
                     <label
@@ -75,18 +75,21 @@ export default function LoginForm() {
                         {processing ? 'Logging in...' : 'Log In'}
                         <LogIn strokeWidth={2} size={18} />
                     </button>
-
-                    <p className='text-xs'>No account yet?
-                        <button
-                            onClick={() => setOpenModal(true)}
-                            className='px-1 text-red-500 cursor-pointer transition-all duration-300 hover:underline'
-                        >
-                            Sign up
-                        </button>
-                        now!
-                    </p>
                 </div>
             </form>
+
+            <div className='text-center'>
+                <p className='text-xs'>No account yet?
+                    <button
+                        onClick={() => setOpenModal(true)}
+                        className='px-1 text-red-500 cursor-pointer transition-all duration-300 hover:underline'
+                    >
+                        Sign up
+                    </button>
+                    now!
+                </p>
+            </div>
+
 
             <Signup
                 openModal={openModal}

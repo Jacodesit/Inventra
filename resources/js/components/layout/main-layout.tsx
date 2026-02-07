@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Sidebar from "../sidebar/sidebar"
+import HeaderLayout from "./header-layout";
 
 type PageProps = {
     children: React.ReactNode
@@ -24,7 +25,10 @@ export default function Layout({children}:PageProps) {
                 setOpenSidebar={handleToggle}
             />
             <main className="flex-1">
-                {children}
+                <HeaderLayout />
+                <div className="max-h-[calc(100vh-24px)] p-6">
+                    {children}
+                </div>
             </main>
         </div>
     )
