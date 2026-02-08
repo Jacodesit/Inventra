@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Str;
 class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
@@ -19,7 +19,15 @@ class Product extends Model
         'product_quantity',
         'product_price',
         'product_status',
+        'business_title',
+        'business_description',
     ];
+
+    protected static function booted() {
+        static::creating(function($product) {
+            $product->product_code = Str::uuid();
+        });
+    }
 
     public function category() {
         return $this->belongsTo(Category::class);

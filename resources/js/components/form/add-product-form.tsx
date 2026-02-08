@@ -4,11 +4,11 @@ import type { Category } from "@/types/inventory"
 
 type pageProps = {
     categories: Category[]
+    onClose: () => void
 }
 
-export default function AddProductForm({categories}:pageProps) {
-
-    const { data,  setData, } = useForm({
+export default function AddProductForm({categories, onClose}:pageProps) {
+    const { data, post, setData, errors, processing, } = useForm({
         business_title: '',
         business_description: '',
         product_image: '',
@@ -16,28 +16,38 @@ export default function AddProductForm({categories}:pageProps) {
         product_description: '',
         product_quantity: '',
         product_price: '',
-        category: '',
+        category_id: '',
     })
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault()
+        post('/products', {
+            onSuccess: () => {
+                onClose();
+            }
+        });
+    }
 
     return (
         <div className='flex flex-col gap-10'>
-            <form className='grid grid-cols-2 gap-1' >
+            <form className='grid grid-cols-2 gap-1' onSubmit={submit}>
                 {/* Business */}
                 <div className="flex flex-col gap-2 px-4 py-3 ">
-                    <h1 className="py-3 text-xl font-medium">Business</h1>
+                    <h1 className="py-3 text-lg font-medium">Business</h1>
                     <div className="text-sm flex flex-col gap-1">
-                        <label htmlFor="business_title" className="font-medium">Title</label>
+                        <label htmlFor="business_title" className="font-medium text-xs">Title</label>
                         <input
                             type="text"
                             value={data.business_title}
                             onChange={(e) => setData('business_title', e.target.value)}
                             placeholder="Business Title"
-                            className="border w-full p-2.5 rounded"
+                            className="border w-full p-2.5 rounded text-xs"
                         />
+                        {errors.business_title && <p className="errors text-red-800 text-xs">{errors.business_title}</p>}
                     </div>
 
                     <div className="text-sm flex flex-col gap-1">
-                        <label htmlFor="business_description" className="font-medium">Description</label>
+                        <label htmlFor="business_description" className="font-medium text-xs">Description</label>
                         <textarea
                             name="business_description"
                             id="business_description"
@@ -45,29 +55,31 @@ export default function AddProductForm({categories}:pageProps) {
                             value={data.business_description}
                             onChange={(e) => setData('business_description', e.target.value)}
                             placeholder="Business Description"
-                            className="border w-full p-2.5 rounded resize-none"
+                            className="border w-full p-2.5 rounded resize-none text-xs"
                         >
                         </textarea>
+                        {errors.business_description && <p className="errors text-red-800 text-xs">{errors.business_description}</p>}
                     </div>
                 </div>
 
                 {/* Product */}
                 <div className="flex flex-col gap-2 px-4 py-3">
-                    <h1 className="py-3 text-xl font-medium">Product</h1>
+                    <h1 className="py-3 text-lg font-medium">Product</h1>
                     <div className="grid grid-cols-2 gap-2">
                         <div className="text-sm flex flex-col gap-1">
-                            <label htmlFor="product_name" className="font-medium">Name</label>
+                            <label htmlFor="product_name" className="font-medium text-xs">Name</label>
                             <input
                                 type="text"
                                 value={data.product_name}
                                 onChange={(e) => setData('product_name', e.target.value)}
                                 placeholder="Product Name"
-                                className="border w-full p-2.5 rounded"
+                                className="border w-full p-2.5 rounded text-xs"
                             />
+                            {errors.product_name && <p className="errors text-red-800 text-xs">{errors.product_name}</p>}
                         </div>
 
                         <div className="text-sm flex flex-col gap-1">
-                            <label htmlFor="product_quantity" className="font-medium">Quantity</label>
+                            <label htmlFor="product_quantity" className="font-medium text-xs">Quantity</label>
                             <input
                                 type="number"
                                 min={1}
@@ -75,12 +87,13 @@ export default function AddProductForm({categories}:pageProps) {
                                 value={data.product_quantity}
                                 onChange={(e) => setData('product_quantity', e.target.value)}
                                 placeholder="Product Quantity"
-                                className="border w-full p-2.5 rounded"
+                                className="border w-full p-2.5 rounded text-xs"
                             />
+                            {errors.product_quantity && <p className="errors text-red-800 text-xs">{errors.product_quantity}</p>}
                         </div>
 
                         <div className="text-sm flex flex-col gap-1">
-                            <label htmlFor="product_price" className="font-medium">Price</label>
+                            <label htmlFor="product_price" className="font-medium text-xs">Price</label>
                             <input
                                 type="number"
                                 min={0}
@@ -88,43 +101,52 @@ export default function AddProductForm({categories}:pageProps) {
                                 value={data.product_price}
                                 onChange={(e) => setData('product_price', e.target.value)}
                                 placeholder="Product Price"
-                                className="border w-full p-2.5 rounded"
+                                className="border w-full p-2.5 rounded text-xs"
                             />
+                            {errors.product_price && <p className="errors text-red-800 text-xs">{errors.product_price}</p>}
                         </div>
 
                         <div className="text-sm flex flex-col gap-1">
-                            <label htmlFor="category" className="font-medium">Category</label>
+                            <label htmlFor="category" className="font-medium text-xs">Category</label>
                             <select
-                                value={data.category}
-                                onChange={(e) => setData('category', e.target.value)}
-                                name="category"
                                 id="category"
-                                className="border w-full p-2.5 rounded"
+                                name="category"
+                                value={data.category_id}
+                                onChange={(e) => setData('category_id', e.target.value)}
+
+                                className="border w-full p-2.5 rounded text-xs "
                             >
+                                <option value="" disabled>
+                                    Select category
+                                </option>
+
                                 {categories.map(category => (
                                     <option
                                         key={category.id}
                                         value={category.id}
+                                        className="hover:bg-sidebar-color"
                                     >
                                         {category.name}
                                     </option>
                                 ))}
                             </select>
+                            {errors.category_id && <p className="errors text-red-800 text-xs">{errors.category_id}</p>}
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-2 text-sm">
                         <div className="flex flex-col gap-1">
-                            <label htmlFor="product_image" className="font-medium">Image</label>
+                            <label htmlFor="product_image" className="font-medium text-xs">Image</label>
                             <input
                                 type="file"
                                 accept="image"
-                                className="border w-full p-2.5 rounded"
+                                className="border w-full p-2.5 rounded text-xs"
                             />
+                            {errors.product_image && <p className="errors text-red-800 text-xs">{errors.product_image}</p>}
                         </div>
 
                         <div className="text-sm flex flex-col gap-1">
-                            <label htmlFor="product_description" className="font-medium">Description</label>
+                            <label htmlFor="product_description" className="font-medium text-xs">Description</label>
                             <textarea
                                 name="product_description"
                                 id="product_description"
@@ -132,10 +154,20 @@ export default function AddProductForm({categories}:pageProps) {
                                 value={data.product_description}
                                 onChange={(e) => setData('product_description', e.target.value)}
                                 placeholder="Product Description"
-                                className="border w-full p-2.5 rounded resize-none"
+                                className="border w-full p-2.5 rounded resize-none text-xs"
                             >
                             </textarea>
+                            {errors.product_description && <p className="errors text-red-800 text-xs">{errors.product_description}</p>}
                         </div>
+                    </div>
+
+                    <div className="flex justify-end ">
+                        <button
+                            disabled={processing}
+                            className="px-6 py-2 border rounded transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer text-sm"
+                        >
+                            {processing ? 'Adding Item...' : 'Add Item'}
+                        </button>
                     </div>
                 </div>
             </form>
