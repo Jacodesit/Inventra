@@ -15,8 +15,6 @@ export type Product = {
     product_quantity: number;
     product_price: number;
     product_status: 'in_stock' | 'low_stock' | 'out_of_stock'
-    business_title: string;
-    business_descrition: string;
     created_at: string;
     updated_at: string;
 }
@@ -27,6 +25,7 @@ export type Auth = {
             name: string;
             id: number;
             email: string;
+            business_title: string;
             created_at: string;
         } | null
     }

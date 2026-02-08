@@ -1,25 +1,31 @@
 import { useState } from 'react';
 
 import AddProduct from '@/components/buttons/add-product';
+import ProductsList from '@/components/data/product-data';
 import Layout from '@/components/layout/main-layout';
 import AddProductModal from '@/components/modal/add-product-modal';
 
 import type { Product } from '@/types/inventory';
 import type { Category } from '@/types/inventory';
+import type { Auth } from '@/types/inventory';
 
 type PageProps = {
     products: Product[]
     categories: Category[]
-}
+} & Auth
 
-export default function Home({products, categories}:PageProps) {
+export default function Home({products, categories, auth}:PageProps) {
     const [openModal, setOpenModal] = useState(false);
     return (
         <Layout>
             <div className="">
-                <AddProduct
-                    onClick={() => setOpenModal(true)}
-                />
+                <div className='flex items-center justify-between'>
+                    <p className='font-semibold text-xl'>{auth.user?.business_title}</p>
+                    <AddProduct
+                        onClick={() => setOpenModal(true)}
+                    />
+                </div>
+
 
                 {/* Handle empty and with states */}
                 {products.length === 0 ? (
@@ -35,7 +41,9 @@ export default function Home({products, categories}:PageProps) {
                     </div>
                 ) : (
                     <div>
-                        products found!
+                        <ProductsList
+                            products={products}
+                        />
                     </div>
                 )}
             </div>

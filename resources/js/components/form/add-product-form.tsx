@@ -9,8 +9,6 @@ type pageProps = {
 
 export default function AddProductForm({categories, onClose}:pageProps) {
     const { data, post, setData, errors, processing, } = useForm({
-        business_title: '',
-        business_description: '',
         product_image: '',
         product_name: '',
         product_description: '',
@@ -30,41 +28,9 @@ export default function AddProductForm({categories, onClose}:pageProps) {
 
     return (
         <div className='flex flex-col gap-10'>
-            <form className='grid grid-cols-2 gap-1' onSubmit={submit}>
-                {/* Business */}
-                <div className="flex flex-col gap-2 px-4 py-3 ">
-                    <h1 className="py-3 text-lg font-medium">Business</h1>
-                    <div className="text-sm flex flex-col gap-1">
-                        <label htmlFor="business_title" className="font-medium text-xs">Title</label>
-                        <input
-                            type="text"
-                            value={data.business_title}
-                            onChange={(e) => setData('business_title', e.target.value)}
-                            placeholder="Business Title"
-                            className="border w-full p-2.5 rounded text-xs"
-                        />
-                        {errors.business_title && <p className="errors text-red-800 text-xs">{errors.business_title}</p>}
-                    </div>
-
-                    <div className="text-sm flex flex-col gap-1">
-                        <label htmlFor="business_description" className="font-medium text-xs">Description</label>
-                        <textarea
-                            name="business_description"
-                            id="business_description"
-                            rows={5}
-                            value={data.business_description}
-                            onChange={(e) => setData('business_description', e.target.value)}
-                            placeholder="Business Description"
-                            className="border w-full p-2.5 rounded resize-none text-xs"
-                        >
-                        </textarea>
-                        {errors.business_description && <p className="errors text-red-800 text-xs">{errors.business_description}</p>}
-                    </div>
-                </div>
-
+            <form className='' onSubmit={submit}>
                 {/* Product */}
                 <div className="flex flex-col gap-2 px-4 py-3">
-                    <h1 className="py-3 text-lg font-medium">Product</h1>
                     <div className="grid grid-cols-2 gap-2">
                         <div className="text-sm flex flex-col gap-1">
                             <label htmlFor="product_name" className="font-medium text-xs">Name</label>

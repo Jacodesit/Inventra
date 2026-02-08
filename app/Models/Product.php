@@ -19,8 +19,6 @@ class Product extends Model
         'product_quantity',
         'product_price',
         'product_status',
-        'business_title',
-        'business_description',
     ];
 
     protected static function booted() {

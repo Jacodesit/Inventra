@@ -26,6 +26,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:500'],
             'phone_number' => ['required', 'string', 'max:15', 'unique:users,phone_number'],
+            'business_title' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -41,6 +42,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'address' => $input['address'],
             'phone_number' => $input['phone_number'],
+            'business_title' => $input['business_title'],
             'password' => Hash::make($input['password']),
         ]);
     }

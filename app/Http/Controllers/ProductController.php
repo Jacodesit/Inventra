@@ -37,8 +37,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'business_title' => 'required|max:255',
-            'business_description' => 'required|string|max:500',
             'product_image' => 'nullable|image:jpg,jpeg,png,webp|max:10048',
             'product_name' => 'required|string|max:255',
             'product_description' => 'required|string|max:500',
@@ -55,8 +53,6 @@ class ProductController extends Controller
         };
 
         Product::create([
-            'business_title' => $validated['business_title'],
-            'business_description' => $validated['business_description'],
             'product_image' => $imagePath,
             'product_name' => $validated['product_name'],
             'product_description' => $validated['product_description'],
