@@ -19,11 +19,12 @@ class Product extends Model
         'product_quantity',
         'product_price',
         'product_status',
+        'users_id'
     ];
 
     protected static function booted() {
         static::creating(function($product) {
-            $product->product_code = Str::uuid();
+            $product->product_code = 'PRD'. rand(10000, 99999);
         });
     }
 

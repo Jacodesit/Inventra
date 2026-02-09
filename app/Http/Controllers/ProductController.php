@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->latest()->get();
+        $products = Product::with('category')
+            ->where('users_id', auth()->id())
+            ->latest()
+            ->get();
+
         $categories = Category::all();
 
         return Inertia::render('Mainpages/products', [
@@ -58,7 +63,8 @@ class ProductController extends Controller
             'product_description' => $validated['product_description'],
             'product_quantity' => $validated['product_quantity'],
             'product_price' => $validated['product_price'],
-            'category_id' => $validated['category_id']
+            'category_id' => $validated['category_id'],
+            'users_id' => auth()->id(),
         ]);
 
         return redirect('/products');
