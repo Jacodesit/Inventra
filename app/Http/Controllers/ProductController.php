@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->get();
+        $products = Product::with('category')->latest()->get();
         $categories = Category::all();
 
         return Inertia::render('Mainpages/products', [

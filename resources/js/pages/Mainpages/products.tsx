@@ -20,12 +20,14 @@ export default function Home({products, categories, auth}:PageProps) {
         <Layout>
             <div className="">
                 <div className='flex items-center justify-between'>
-                    <p className='font-semibold text-xl'>{auth.user?.business_title}</p>
+                    <div className='flex flex-col'>
+                        <p className='text-xs text-gray-500'>Business</p>
+                        <h1 className='font-semibold text-xl'>{auth.user?.business_title}</h1>
+                    </div>
                     <AddProduct
                         onClick={() => setOpenModal(true)}
                     />
                 </div>
-
 
                 {/* Handle empty and with states */}
                 {products.length === 0 ? (
@@ -40,11 +42,9 @@ export default function Home({products, categories, auth}:PageProps) {
                         <p className='text-gray-500'>No products found!</p>
                     </div>
                 ) : (
-                    <div>
-                        <ProductsList
-                            products={products}
-                        />
-                    </div>
+                    <ProductsList
+                        products={products}
+                    />
                 )}
             </div>
             <AddProductModal

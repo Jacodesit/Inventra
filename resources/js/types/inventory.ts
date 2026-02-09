@@ -17,6 +17,11 @@ export type Product = {
     product_status: 'in_stock' | 'low_stock' | 'out_of_stock'
     created_at: string;
     updated_at: string;
+    category?: {
+        id: number;
+        name: string;
+        description: string
+    } | null
 }
 
 export type Auth = {
