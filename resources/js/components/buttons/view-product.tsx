@@ -14,7 +14,7 @@ export default function ViewProduct({product}:pageProps) {
     const [openPanel, setOpenPanel] = useState(false);
 
     return (
-        <div>
+        <div className="flex items-center">
             <button
                 onClick={() => setOpenPanel(true)}
                 title="View Product"

@@ -1,6 +1,7 @@
 import { useForm } from "@inertiajs/react"
 
 import type { Category } from "@/types/inventory"
+import type { ProductForm } from "@/types/inventory"
 
 type pageProps = {
     categories: Category[]
@@ -8,8 +9,8 @@ type pageProps = {
 }
 
 export default function AddProductForm({categories, onClose}:pageProps) {
-    const { data, post, setData, errors, processing, } = useForm({
-        product_image: '',
+    const { data, post, setData, errors, processing, } = useForm<ProductForm>({
+        product_image: null,
         product_name: '',
         product_description: '',
         product_quantity: '',
@@ -20,6 +21,7 @@ export default function AddProductForm({categories, onClose}:pageProps) {
     const submit = (e: React.FormEvent) => {
         e.preventDefault()
         post('/products', {
+            forceFormData: true,
             onSuccess: () => {
                 onClose();
             }
@@ -106,6 +108,7 @@ export default function AddProductForm({categories, onClose}:pageProps) {
                             <input
                                 type="file"
                                 accept="image"
+                                onChange={(e) => setData('product_image', e.target.files ? e.target.files[0] : null)}
                                 className="border w-full p-2.5 rounded text-xs"
                             />
                             {errors.product_image && <p className="errors text-red-800 text-xs">{errors.product_image}</p>}

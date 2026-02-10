@@ -9,7 +9,7 @@ export type Category = {
 export type Product = {
     id: number;
     product_code: string;
-    product_image: string;
+    product_image: string | null;
     product_name: string;
     product_description: string;
     product_quantity: number;
@@ -34,4 +34,13 @@ export type Auth = {
             created_at: string;
         } | null
     }
+}
+
+export type ProductForm = {
+    product_image: File | null
+    product_name: string
+    product_description: string
+    product_quantity: string
+    product_price: string
+    category_id: string
 }

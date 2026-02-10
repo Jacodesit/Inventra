@@ -12,7 +12,7 @@ export default function ProductDetailsCard({product}:pageProps) {
                     {product.product_image === null ? (
                         <img src="/Empty State/product.svg" alt="Image" className="rounded h-15" />
                     ) : (
-                        <img src={product.product_image} alt="Product Image" className="rounded h-40" />
+                        <img src={product.product_image} alt="Product Image" className="rounded h-15" />
                     )}
                 </div>
                 <div className="flex items-center">

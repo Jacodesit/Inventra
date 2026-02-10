@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
+// use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -42,7 +44,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'product_image' => 'nullable|image:jpg,jpeg,png,webp|max:10048',
+            'product_image' => 'nullable|file|image|mimes:jpg,jpeg,png,webp|max:10048',
             'product_name' => 'required|string|max:255',
             'product_description' => 'required|string|max:500',
             'product_quantity' => 'required|integer|min:0',
@@ -53,12 +55,12 @@ class ProductController extends Controller
         $imagePath = null;
 
         if($request->hasFile('product_image')) {
-            $imagePath = $request->file('product_image')
-            ->store('product','public');
+            $imagePath = $request->file('product_image')->store('product','public');
+            $imageUrl = Storage::url($imagePath);
         };
 
         Product::create([
-            'product_image' => $imagePath,
+            'product_image' => $imageUrl,
             'product_name' => $validated['product_name'],
             'product_description' => $validated['product_description'],
             'product_quantity' => $validated['product_quantity'],
