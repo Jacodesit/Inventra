@@ -37,10 +37,10 @@ export type Auth = {
 }
 
 export type ProductForm = {
-    product_image: File | null
+    product_image: File | null | string
     product_name: string
     product_description: string
-    product_quantity: string
-    product_price: string
-    category_id: string
+    product_quantity: number | string
+    product_price: number | string
+    category_id: number | string
 }

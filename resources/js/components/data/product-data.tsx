@@ -44,7 +44,7 @@ export default function ProductsList({products}:pageProps) {
                             </td>
                             <td className='flex items-center gap-2'>
                                 <ViewProduct product={product}/>
-                                <EditProduct />
+                                <EditProduct product={product}/>
                                 <DeleteProduct />
                             </td>
                         </tr>
