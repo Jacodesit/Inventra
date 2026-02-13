@@ -44,6 +44,7 @@ export default function Home({products, categories, auth}:PageProps) {
                 ) : (
                     <ProductsList
                         products={products}
+                        categories={categories}
                     />
                 )}
             </div>

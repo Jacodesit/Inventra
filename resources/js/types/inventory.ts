@@ -38,6 +38,7 @@ export type Auth = {
 
 export type ProductForm = {
     product_image: File | null | string
+    product_image_remove: boolean
     product_name: string
     product_description: string
     product_quantity: number | string

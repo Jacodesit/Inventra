@@ -1,6 +1,7 @@
 import { PhilippinePeso } from 'lucide-react';
 
 import type { Product } from "@/types/inventory"
+import type { Category } from '@/types/inventory';
 
 import DeleteProduct from '../buttons/delete-product';
 import EditProduct from '../buttons/edit-product';
@@ -8,9 +9,10 @@ import ViewProduct from '../buttons/view-product';
 
 type pageProps = {
     products: Product[]
+    categories: Category[]
 }
 
-export default function ProductsList({products}:pageProps) {
+export default function ProductsList({products, categories}:pageProps) {
     return (
         <div className="mt-5">
             <table className="w-full border-collapse">
@@ -31,7 +33,7 @@ export default function ProductsList({products}:pageProps) {
                             key={product.id}
                             className="grid grid-cols-7 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
                         >
-                            <td>{product.product_name}</td>
+                            <td className='line-clamp-1'>{product.product_name}</td>
                             <td>{product.product_description}</td>
                             <td>{product.product_quantity} packs</td>
                             <td>{product.category?.name}</td>
@@ -44,7 +46,7 @@ export default function ProductsList({products}:pageProps) {
                             </td>
                             <td className='flex items-center gap-2'>
                                 <ViewProduct product={product}/>
-                                <EditProduct product={product}/>
+                                <EditProduct product={product} categories={categories}/>
                                 <DeleteProduct />
                             </td>
                         </tr>

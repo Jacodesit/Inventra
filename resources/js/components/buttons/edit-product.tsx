@@ -3,13 +3,15 @@ import { SquarePen } from "lucide-react"
 import { useState } from "react"
 
 import type { Product } from "@/types/inventory"
+import type { Category } from "@/types/inventory";
 import EditProductModal from "../modal/edit-product"
 
 type pageProps = {
     product: Product
+    categories: Category[]
 }
 
-export default function EditProduct({product}:pageProps) {
+export default function EditProduct({product, categories}:pageProps) {
     const [openEditPanel, setOpenEditPanel] = useState(false);
 
     return (
@@ -22,6 +24,7 @@ export default function EditProduct({product}:pageProps) {
                 <SquarePen strokeWidth={1.5} size={20} />
             </button>
             <EditProductModal
+                categories={categories}
                 product={product}
                 openEditPanel={openEditPanel}
                 onClose={() => setOpenEditPanel(false)}

@@ -4,6 +4,9 @@ import type { Product } from "@/types/inventory"
 import type { Category } from "@/types/inventory"
 import type { ProductForm } from "@/types/inventory"
 
+import { CircleX } from "../../../../components/animate-ui/icons/circle-x";
+import { useRoute } from '../../../../vendor/tightenco/ziggy'
+
 type pageProps = {
     product: Product;
     categories: Category[]
@@ -11,8 +14,9 @@ type pageProps = {
 }
 
 export default function EditProductForm({categories, product, onClose}:pageProps) {
-    const { data, post, setData, errors, processing, } = useForm<ProductForm>({
-        product_image: product.product_image,
+    const { data, put, setData, errors, processing, } = useForm<ProductForm>({
+        product_image: null,
+        product_image_remove: false,
         product_name: product.product_name,
         product_description: product.product_description,
         product_quantity: product.product_quantity,
@@ -20,14 +24,16 @@ export default function EditProductForm({categories, product, onClose}:pageProps
         category_id: product.category?.id ?? 0,
     })
 
+    const route = useRoute();
+
     const submit = (e: React.FormEvent) => {
         e.preventDefault()
-        post('/products', {
-            forceFormData: true,
+        put(route('products.update', {product: product.id}), {
             onSuccess: () => {
                 onClose();
             }
-        });
+
+        })
     }
 
     return (
@@ -116,6 +122,33 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                             {errors.product_image && <p className="errors text-red-800 text-xs">{errors.product_image}</p>}
                         </div>
 
+                        <div>
+                            <p className="font-medium text-xs mb-1">Image Preview</p>
+                            <div className="gap-1 relative ">
+                                <button
+                                    className="absolute left-38 bottom-22"
+                                    onClick={() => {
+                                        setData('product_image_remove', true)
+                                        setData('product_image', null)
+                                    }}
+                                >
+                                    <CircleX
+                                        animateOnHover
+                                        size={20}
+                                        className={`text-red-500 ${product.product_image !== null ? 'block' : 'hidden'}`}
+                                    />
+                                </button>
+
+                                {product.product_image === null ? (
+                                    <div className="border-l-4 border border-amber-500 p-5 rounded text-center bg-amber-50">
+                                        <p className="text-xs text-amber-600 font-medium">This product have no image!</p>
+                                    </div>
+                                ) : (
+                                    <img src={product.product_image} alt="Product Image" className="rounded h-30 w-45" />
+                                )}
+                            </div>
+                        </div>
+
                         <div className="text-sm flex flex-col gap-1">
                             <label htmlFor="product_description" className="font-medium text-xs">Description</label>
                             <textarea
@@ -130,6 +163,8 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                             </textarea>
                             {errors.product_description && <p className="errors text-red-800 text-xs">{errors.product_description}</p>}
                         </div>
+
+
                     </div>
 
                     <div className="flex justify-end ">
@@ -137,7 +172,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                             disabled={processing}
                             className="px-6 py-2 border rounded transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer text-sm"
                         >
-                            {processing ? 'Adding Item...' : 'Add Item'}
+                            {processing ? 'Updating Item...' : 'Update Item'}
                         </button>
                     </div>
                 </div>
