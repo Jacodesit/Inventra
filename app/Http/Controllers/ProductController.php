@@ -20,7 +20,7 @@ class ProductController extends Controller
         $products = Product::with('category')
             ->where('users_id', auth()->id())
             ->latest()
-            ->get();
+            ->paginate(7);
 
         $categories = Category::all();
 
@@ -53,11 +53,16 @@ class ProductController extends Controller
         ]);
 
         $imagePath = null;
+        $imageUrl = null;
 
         if($request->hasFile('product_image')) {
             $imagePath = $request->file('product_image')->store('product','public');
             $imageUrl = Storage::url($imagePath);
         };
+
+        $lowStock = 5;
+        $outOfStock = 0;
+
 
         Product::create([
             'product_image' => $imageUrl,
@@ -147,6 +152,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect('/products');
     }
 }

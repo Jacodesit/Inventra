@@ -17,6 +17,10 @@ export type Product = {
     product_status: 'in_stock' | 'low_stock' | 'out_of_stock'
     created_at: string;
     updated_at: string;
+    stock: string;
+    stock_status: string;
+    expected_income: number;
+    formatted_date: string;
     category?: {
         id: number;
         name: string;

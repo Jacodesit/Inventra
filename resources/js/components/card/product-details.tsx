@@ -1,3 +1,4 @@
+import { PhilippinePeso } from "lucide-react"
 import type { Product } from "@/types/inventory"
 
 type pageProps = {
@@ -28,25 +29,34 @@ export default function ProductDetailsCard({product}:pageProps) {
                     <p className="font-medium">{product.product_code}</p>
                 </div>
                 <div className="flex justify-between border-b pb-2">
+                    <p className="font-medium text-gray-500">Added At</p>
+                    <p className="font-medium">{product.formatted_date}</p>
+                </div>
+                <div className="flex justify-between border-b pb-2">
                     <p className="font-medium text-gray-500">Category</p>
                     <p className="font-medium">{product.category?.name}</p>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                     <p className="font-medium text-gray-500">Quantity</p>
-                    <p className="font-medium">{product.product_quantity} pcs</p>
+                    <p className="font-medium">{product.product_quantity} pack(s)</p>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                     <p className="font-medium text-gray-500">Price</p>
-                    <p className="font-medium">{product.product_price}</p>
+                    <p className="font-medium flex items-center"><PhilippinePeso size={14}/>{product.product_price}</p>
                 </div>
                 <div className="flex justify-between border-b pb-2">
                     <p className="font-medium text-gray-500">Status</p>
                     <p className={
-                        product.product_status === 'in_stock' ? 'text-green-500 capitalize font-medium' :
-                        product.product_status === 'low_stock' ? 'text-amber-500 font-medium' : 'text-red-500 font-medium'
+                        product.stock_status === 'in_stock' ? 'font-medium text-green-500 capitalize' :
+                        product.stock_status === 'low_stock' ? 'font-medium text-amber-500' : 'font-medium text-red-500'
                     }>
-                        {product.product_status.replace(/_/g, ' ').replace(/\b\w/g, c => c)}
+                        {product.stock}
                     </p>
+                </div>
+                <div className="flex justify-between items-center border-b pb-2">
+                    <p className="font-medium text-gray-500">Expected Income</p>
+                    <p className="text-xs text-muted-foreground">(Quantity x Price)</p>
+                    <p className="font-medium flex items-center"><PhilippinePeso size={14}/>{product.expected_income.toLocaleString()}</p>
                 </div>
             </div>
         </div>

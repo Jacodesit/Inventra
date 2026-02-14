@@ -10,6 +10,7 @@ type pageProps = {
 
 export default function AddProductForm({categories, onClose}:pageProps) {
     const { data, post, setData, errors, processing, } = useForm<ProductForm>({
+        product_image_remove: false,
         product_image: null,
         product_name: '',
         product_description: '',
