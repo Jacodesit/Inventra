@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 // use Illuminate\Container\Attributes\Storage;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -59,10 +60,6 @@ class ProductController extends Controller
             $imagePath = $request->file('product_image')->store('product','public');
             $imageUrl = Storage::url($imagePath);
         };
-
-        $lowStock = 5;
-        $outOfStock = 0;
-
 
         Product::create([
             'product_image' => $imageUrl,
@@ -155,5 +152,35 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect('/products');
+    }
+
+    public function getStatusCounts() {
+        $threshold = 5;
+        $userId = auth()->id();
+        $totalProducts = Product::where('users_id', $userId)->count();
+        $lowStock = Product::where('users_id', $userId)
+            ->where('product_quantity', '>', 0 )
+            ->where('product_quantity', '<=', $threshold)
+            ->select('product_code', 'product_name', 'product_quantity', 'product_status')
+            ->limit(6)
+            ->get();
+
+        $noStock = Product::where('users_id', $userId)
+            ->where('product_quantity', '=', 0)
+            ->select('product_code', 'product_name', 'product_quantity', 'product_status')
+            ->limit(6)
+            ->get();
+
+        $statusCounts = Product::where('users_id', $userId)
+            ->select('product_status', DB::raw('count(*) as total'))
+            ->groupBy('product_status')
+            ->pluck('total', 'product_status');
+
+        return inertia('Mainpages/dashboard', [
+            'totalProducts' => $totalProducts,
+            'statusCounts' => $statusCounts,
+            'lowStock' => $lowStock,
+            'noStock' => $noStock
+        ]);
     }
 }

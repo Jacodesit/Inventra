@@ -7,7 +7,7 @@ use Laravel\Fortify\Features;
 
 Route::get('/', fn() => Inertia::render('welcome'));
 Route::resource('products', ProductController::class)->except('index');
-Route::get('/dashboard', fn() => Inertia::render('Mainpages/dashboard'))->name('dashboard');
+Route::get('/dashboard', [ProductController::class, 'getStatusCounts'])->name('dashboard');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/categories', fn() => Inertia::render('Mainpages/categories'))->name('categories');
 Route::get('/stock', fn() => Inertia::render('Mainpages/stock'))->name('stock');

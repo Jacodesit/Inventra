@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
@@ -27,6 +29,16 @@ class Product extends Model
     protected static function booted() {
         static::creating(function($product) {
             $product->product_code = 'PRD'. rand(10000, 99999);
+
+            if ($product->product_quantity <= 0) $product->product_status = 'out_of_stock';
+            elseif ($product->product_quantity <= 5) $product->product_status = 'low_stock';
+            else $product->product_status = 'in_stock';
+        });
+
+        static::updating(function ($product) {
+            if ($product->product_quantity <= 0) $product->product_status = 'out_of_stock';
+            elseif ($product->product_quantity <= 5) $product->product_status = 'low_stock';
+            else $product->product_status = 'in_stock';
         });
     }
 

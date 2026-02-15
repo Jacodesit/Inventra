@@ -32,7 +32,6 @@ export default function EditProductForm({categories, product, onClose}:pageProps
             onSuccess: () => {
                 onClose();
             }
-
         })
     }
 

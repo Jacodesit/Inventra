@@ -19,12 +19,12 @@ export default function Layout({children}:PageProps) {
     };
 
     return (
-        <div className="flex">
+        <div className="flex ">
             <Sidebar
                 openSidebar={openSidebar}
                 setOpenSidebar={handleToggle}
             />
-            <main className="flex-1">
+            <main className="flex-1 ">
                 <HeaderLayout />
                 <div className="max-h-[calc(100vh-24px)] p-6">
                     {children}
