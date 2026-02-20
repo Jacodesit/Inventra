@@ -32,7 +32,7 @@ export default function Home() {
                 <h1 className='font-semibold text-xl'>{auth.user?.business_title}</h1>
             </div>
             <div className='grid grid-rows lg:grid-cols-4 gap-2 mb-5'>
-                <div className='border-l-4 border border-blue-500 p-5 rounded-md flex justify-between bg-blue-50'>
+                <div className='border-l-4 border border-blue-500 p-5 rounded-md flex justify-between'>
                     <div>
                         <p className='capitalize font-medium mb-2 text-blue-500'>Total Products</p>
                         <p className='text-4xl text-blue-500'>{totalProducts}</p>
@@ -45,9 +45,9 @@ export default function Home() {
                     <div
                         key={status}
                         className={`border-l-4 p-5 rounded-md flex justify-between
-                                ${status === 'in_stock' ? 'border border-green-500 text-green-500 bg-green-50' : ''}
-                                ${status === 'low_stock' ? 'border border-amber-500 text-amber-500 bg-amber-50' : ''}
-                                ${status === 'out_of_stock' ? 'border border-red-500 text-red-500 bg-red-50' : ''}
+                                ${status === 'in_stock' ? 'border border-green-500 text-green-500' : ''}
+                                ${status === 'low_stock' ? 'border border-amber-500 text-amber-500 ' : ''}
+                                ${status === 'out_of_stock' ? 'border border-red-500 text-red-500' : ''}
                             `}
                     >
                         <div>

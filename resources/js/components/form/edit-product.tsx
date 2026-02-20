@@ -19,7 +19,6 @@ export default function EditProductForm({categories, product, onClose}:pageProps
         product_image_remove: false,
         product_name: product.product_name,
         product_description: product.product_description,
-        product_quantity: product.product_quantity,
         product_price: product.product_price,
         category_id: product.category?.id ?? 0,
     })
@@ -41,7 +40,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                 {/* Product */}
                 <div className="flex flex-col justify-between h-[76vh] px-4 py-3">
                     <div>
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="grid grid-cols-2 gap-2 mb-2">
                             <div className="text-sm flex flex-col gap-1">
                                 <label htmlFor="product_name" className="font-medium text-xs">Name</label>
                                 <input
@@ -54,7 +53,14 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                 {errors.product_name && <p className="errors text-red-800 text-xs">{errors.product_name}</p>}
                             </div>
 
-                            <div className="text-sm flex flex-col gap-1">
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="product_quantity" className="font-medium text-xs">Quantity</label>
+                                <div className="border p-2.5 rounded">
+                                    <p className="text-xs">{product.product_quantity}</p>
+                                </div>
+                            </div>
+
+                            {/* <div className="text-sm flex flex-col gap-1">
                                 <label htmlFor="product_quantity" className="font-medium text-xs">Quantity</label>
                                 <input
                                     type="number"
@@ -66,7 +72,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                     className="border w-full p-2.5 rounded text-xs"
                                 />
                                 {errors.product_quantity && <p className="errors text-red-800 text-xs">{errors.product_quantity}</p>}
-                            </div>
+                            </div> */}
 
                             <div className="text-sm flex flex-col gap-1">
                                 <label htmlFor="product_price" className="font-medium text-xs">Price</label>

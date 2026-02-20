@@ -100,7 +100,7 @@ class ProductController extends Controller
             'product_image_remove' => 'nullable|boolean',
             'product_name' => 'required|string|max:255',
             'product_description' => 'required|string|max:500',
-            'product_quantity' => 'required|integer|min:0',
+            // 'product_quantity' => 'required|integer|min:0',
             'product_price' => 'required|numeric|min:0',
             'category_id' => 'required|exists:categories,id',
         ]);
@@ -135,7 +135,7 @@ class ProductController extends Controller
             'product_image' => $imageUrl,
             'product_name' => $validated['product_name'],
             'product_description' => $validated['product_description'],
-            'product_quantity' => $validated['product_quantity'],
+            // 'product_quantity' => $validated['product_quantity'],
             'product_price' => $validated['product_price'],
             'category_id' => $validated['category_id'],
             'users_id' => auth()->id(),

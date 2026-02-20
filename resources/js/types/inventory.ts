@@ -45,7 +45,7 @@ export type ProductForm = {
     product_image_remove: boolean
     product_name: string
     product_description: string
-    product_quantity: number | string
+    // product_quantity: number | string
     product_price: number | string
     category_id: number | string
 }
