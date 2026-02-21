@@ -10,6 +10,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -181,6 +182,18 @@ class ProductController extends Controller
             'statusCounts' => $statusCounts,
             'lowStock' => $lowStock,
             'noStock' => $noStock
+        ]);
+    }
+
+    public function getCategories() {
+        $categories = Category::withCount([
+            'products as products_quantity' => function ($query) {
+                $query->where('user_id', Auth::id());
+            }
+        ])->get();
+
+        return Inertia::render('Mainpages/categories', [
+            'categories' => $categories
         ]);
     }
 }
