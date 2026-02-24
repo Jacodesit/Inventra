@@ -4,6 +4,8 @@ import AddCategory from '@/components/buttons/add-categories';
 import CategoriesList from '@/components/data/categories-data';
 import Layout from '@/components/layout/main-layout';
 
+import AddCategoriesModal from '@/components/modal/add-categories-modal';
+
 import type { Auth, Category } from '@/types/inventory';
 
 type pageProps = {
@@ -11,7 +13,7 @@ type pageProps = {
 } & Auth
 
 export default function Home({auth, categories}:pageProps) {
-    const [, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     return (
         <Layout>
             <div className="">
@@ -26,6 +28,10 @@ export default function Home({auth, categories}:pageProps) {
                 </div>
                 <CategoriesList categories={categories} />
             </div>
+            <AddCategoriesModal
+                openModal={openModal}
+                onClose={() => setOpenModal(false)}
+            />
         </Layout>
     )
 }

@@ -4,6 +4,7 @@ export type Category = {
     description: string;
     created_at: string;
     updated_at: string;
+    products_quantity: number;
 }
 
 export type Product = {

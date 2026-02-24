@@ -1,6 +1,7 @@
 type pageProps = {
     onClick: () => void
 }
+
 export default function AddCategory({onClick}:pageProps) {
     return (
         <div className='flex justify-end'>

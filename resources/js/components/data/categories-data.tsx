@@ -28,8 +28,8 @@ export default function CategoriesList({categories}:pageProps) {
                             >
                                 <td>{category.name}</td>
                                 <td>{category.description}</td>
-                                <td>{'  '}</td>
-                                <th className="text-left">
+                                <td>{category.products_quantity}</td>
+                                <th className="text-left flex gap-2">
                                     <button>
                                         <SquarePen strokeWidth={1.5} size={20} />
                                     </button>

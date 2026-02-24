@@ -186,9 +186,10 @@ class ProductController extends Controller
     }
 
     public function getCategories() {
+        $userId = auth()->id();
         $categories = Category::withCount([
-            'products as products_quantity' => function ($query) {
-                $query->where('user_id', Auth::id());
+            'products as products_quantity' => function ($query) use ($userId) {
+                $query->where('users_id', $userId);
             }
         ])->get();
 
