@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,5 +14,6 @@ Route::get('/categories', [ProductController::class, 'getCategories'])->name('ca
 Route::get('/stock', fn() => Inertia::render('Mainpages/stock'))->name('stock');
 Route::get('/reports', fn() => Inertia::render('Mainpages/reports'))->name('reports');
 
-
+// Adding a new category
+Route::post('/categories', [CategoriesController::class, 'store'])->name('category.store');
 require __DIR__.'/settings.php';
