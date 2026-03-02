@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import { usePage } from '@inertiajs/react';
 
 import { Package } from 'lucide-react';
@@ -27,27 +28,36 @@ export default function Home() {
     ]
     return (
         <Layout>
-            <div className='flex flex-col mb-5'>
-                <p className='text-xs text-gray-500'>Business</p>
-                <h1 className='font-semibold text-xl'>{auth.user?.business_title}</h1>
+            <div className='flex items-center justify-between mb-5'>
+                <div className='flex flex-col'>
+                    <p className='text-xs text-gray-500'>Business</p>
+                    <h1 className='font-semibold text-xl'>{auth.user?.business_title}</h1>
+                </div>
+                <Link
+                    className='text-sm border p-3 rounded-md cursor-pointer transition-all duration-300 hover:bg-sidebar-color hover:text-white'
+                    href='/products'
+                >
+                    Add Product
+                </Link>
             </div>
+
             <div className='grid grid-rows lg:grid-cols-4 gap-2 mb-5'>
-                <div className='border-l-4 border border-blue-500 p-5 rounded-md flex justify-between'>
+                <div className='border-l-4 border border-blue-400 p-5 rounded-md flex justify-between'>
                     <div>
-                        <p className='capitalize font-medium mb-2 text-blue-500'>Total Products</p>
-                        <p className='text-4xl text-blue-500'>{totalProducts}</p>
+                        <p className='capitalize font-medium mb-2 text-blue-400'>Total Products</p>
+                        <p className='text-4xl text-blue-400'>{totalProducts}</p>
                     </div>
                     <div className=''>
-                        <Package strokeWidth={1} size={40} className='text-blue-500'/>
+                        <Package strokeWidth={1} size={40} className='text-blue-400'/>
                     </div>
                 </div>
                 {order.map((status, index) => (
                     <div
                         key={status}
                         className={`border-l-4 p-5 rounded-md flex justify-between
-                                ${status === 'in_stock' ? 'border border-green-500 text-green-500' : ''}
-                                ${status === 'low_stock' ? 'border border-amber-500 text-amber-500 ' : ''}
-                                ${status === 'out_of_stock' ? 'border border-red-500 text-red-500' : ''}
+                                ${status === 'in_stock' ? 'border border-green-400 text-green-400' : ''}
+                                ${status === 'low_stock' ? 'border border-amber-400 text-amber-400 ' : ''}
+                                ${status === 'out_of_stock' ? 'border border-red-400 text-red-400' : ''}
                             `}
                     >
                         <div>

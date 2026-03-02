@@ -1,3 +1,5 @@
+import { PackageCheck } from 'lucide-react';
+
 import type { Product } from "@/types/inventory"
 
 type pageProps = {
@@ -12,7 +14,8 @@ export default function NoStock({noStock}:pageProps) {
                 <span className="text-xs">(View all out of stock items in products page)</span>
             </div>
             {noStock.length === 0 ? (
-                <div className="text-center h-40 flex justify-center items-center text-gray-500">
+                <div className="text-center h-40 flex flex-col gap-1 justify-center items-center text-gray-500">
+                    <PackageCheck className='text-gray-500' strokeWidth={1}/>
                     <p className="text-xs">All items have enough stock</p>
                 </div>
             ) : (

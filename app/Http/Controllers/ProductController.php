@@ -197,4 +197,27 @@ class ProductController extends Controller
             'categories' => $categories
         ]);
     }
+
+    public function getProducts() {
+        $products = Product::with('category')
+            ->where('users_id', auth()->id())->latest()->paginate(7);
+
+        $categories = Category::all();
+
+        return inertia::render('Mainpages/stock', [
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+
+    public function updateQuantities(Request $request)
+    {
+        foreach ($request->quantities as $id => $quantity) {
+            Product::where('id', $id)->update([
+                'product_quantity' => $quantity
+            ]);
+        }
+
+        return back();
+    }
 }

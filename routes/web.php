@@ -11,9 +11,12 @@ Route::resource('products', ProductController::class)->except('index');
 Route::get('/dashboard', [ProductController::class, 'getStatusCounts'])->name('dashboard');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/categories', [ProductController::class, 'getCategories'])->name('categories');
-Route::get('/stock', fn() => Inertia::render('Mainpages/stock'))->name('stock');
+Route::get('/stock', [ProductController::class, 'getProducts'])->name('stock');
 Route::get('/reports', fn() => Inertia::render('Mainpages/reports'))->name('reports');
 
 // Adding a new category
 Route::post('/categories', [CategoriesController::class, 'store'])->name('category.store');
+
+// Updating quantity
+Route::patch('/stock/update-quantities', [ProductController::class, 'updateQuantities'])->name('update-quantity');
 require __DIR__.'/settings.php';

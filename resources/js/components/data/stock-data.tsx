@@ -1,65 +1,61 @@
-import { Link } from '@inertiajs/react';
+import { Link } from "@inertiajs/react"
 
-import { ChevronRight, PhilippinePeso } from 'lucide-react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
-import type { Product } from "@/types/inventory"
-import type { Category } from '@/types/inventory';
-
-import DeleteProduct from '../buttons/delete-product';
-import EditProduct from '../buttons/edit-product';
-import ViewProduct from '../buttons/view-product';
+import type { Product, Category } from "@/types/inventory"
 
 type pageProps = {
     products: {
-        data: Product[]
-        links: {
-            url: string | null
-            label: string
-            active: boolean
-        }[]
-    }
+        data: Product[];
+        links: { url: string | null; label: string; active: boolean }[];
+    };
     categories: Category[]
+    quantities: Record<number, number>
+    increment: (id: number) => void
+    decrement: (id: number) => void
 }
 
-export default function ProductsList({products, categories}:pageProps) {
+export default function StockData({products, quantities, increment, decrement}:pageProps) {
+
     return (
         <div className="mt-5 flex flex-col justify-between h-[75vh]">
             <table className="w-full border-collapse">
                 <thead className="bg-sidebar-color text-white">
-                    <tr className="grid grid-cols-8 text-left p-5">
+                    <tr className="grid grid-cols-6 text-left p-5">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Quantity</th>
                         <th>Category</th>
-                        <th>Price</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Current Quantity</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {products.data.map(product => (
                         <tr
                             key={product.id}
-                            className="grid grid-cols-8 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
+                            className="grid grid-cols-6 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
                         >
                             <td>{product.product_code}</td>
                             <td className='line-clamp-1'>{product.product_name}</td>
-                            <td>{product.product_description}</td>
-                            <td>{product.product_quantity} pack(s)</td>
+
                             <td>{product.category?.name}</td>
-                            <td className='flex items-center'><PhilippinePeso size={15} />{product.product_price}</td>
                             <td className={
                                 product.stock_status === 'in_stock' ? 'text-green-500 capitalize' :
                                 product.stock_status === 'low_stock' ? 'text-amber-500' : 'text-red-500'
                             }>
                                 {product.stock}
                             </td>
+                            <td>{product.product_quantity}</td>
                             <td className='flex items-center gap-2'>
-                                <ViewProduct product={product} categories={categories}/>
-                                <EditProduct product={product} categories={categories}/>
-                                <DeleteProduct product={product} />
+                                <div className="flex items-center gap-2">
+                                    <button className="px-2 border rounded" onClick={() => decrement(product.id)}>-</button>
+                                    <div>
+                                        {quantities[product.id]}
+                                    </div>
+                                    <button className="px-2 border rounded" onClick={() => increment(product.id)}>+</button>
+                                </div>
                             </td>
                         </tr>
                     ))}
@@ -88,7 +84,6 @@ export default function ProductsList({products, categories}:pageProps) {
                             {label}
                         </Link>
                     );
-
                 })}
             </div>
         </div>

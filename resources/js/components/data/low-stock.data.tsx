@@ -1,3 +1,5 @@
+import { PackageSearch } from 'lucide-react';
+
 import type { Product } from "@/types/inventory"
 
 type pageProps = {
@@ -12,8 +14,9 @@ export default function LowStock({lowStock}:pageProps) {
                 <span className="text-xs">(View all low stock items in products page)</span>
             </div>
             {lowStock.length === 0 ? (
-                <div className="text-center h-40 flex justify-center items-center text-gray-500">
-                    <p className="text-xs">No low stock items for this moment!</p>
+                <div className="text-center h-40 flex flex-col gap-1 justify-center items-center">
+                    <PackageSearch className='text-gray-500' strokeWidth={1}/>
+                    <p className="text-xs text-gray-500">No low stock items for this moment!</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-3 gap-2">

@@ -10,7 +10,10 @@ import type { Category } from '@/types/inventory';
 import type { Auth } from '@/types/inventory';
 
 type PageProps = {
-    products: Product[]
+    products: {
+        data: Product[];
+        links: { url: string | null; label: string; active: boolean }[];
+    };
     categories: Category[]
 } & Auth
 
@@ -30,7 +33,7 @@ export default function Home({products, categories, auth}:PageProps) {
                 </div>
 
                 {/* Handle empty and with states */}
-                {products.length === 0 ? (
+                {products.data.length === 0 ? (
                     <div className='flex items-center justify-center h-[70vh] flex-col gap-5'>
                         <div className=''>
                             <img
