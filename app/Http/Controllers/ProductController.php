@@ -200,7 +200,7 @@ class ProductController extends Controller
 
     public function getProducts() {
         $products = Product::with('category')
-            ->where('users_id', auth()->id())->latest()->paginate(7);
+            ->where('users_id', auth()->id())->latest()->paginate(5);
 
         $categories = Category::all();
 

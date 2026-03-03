@@ -35,7 +35,7 @@ export default function StockData({products, quantities, increment, decrement}:p
                     {products.data.map(product => (
                         <tr
                             key={product.id}
-                            className="grid grid-cols-6 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
+                            className="grid grid-cols-6 text-sm border-b p-5 odd:bg-gray-100 even:bg-white items-center"
                         >
                             <td>{product.product_code}</td>
                             <td className='line-clamp-1'>{product.product_name}</td>
@@ -49,12 +49,31 @@ export default function StockData({products, quantities, increment, decrement}:p
                             </td>
                             <td>{product.product_quantity}</td>
                             <td className='flex items-center gap-2'>
-                                <div className="flex items-center gap-2">
-                                    <button className="px-2 border rounded" onClick={() => decrement(product.id)}>-</button>
-                                    <div>
+                                <div className="flex items-center border rounded-md">
+                                    {/* Decrement */}
+                                    <div className="transition-all duration-300 hover:bg-gray-200 rounded-tl-sm rounded-bl-sm ">
+                                        <button
+                                            className="px-3 py-2 flex items-center justify-center cursor-pointer "
+                                        onClick={() => decrement(product.id)}
+                                        >
+                                            -
+                                        </button>
+                                    </div>
+
+                                    {/* Count */}
+                                    <div className="border-r border-l px-3">
                                         {quantities[product.id]}
                                     </div>
-                                    <button className="px-2 border rounded" onClick={() => increment(product.id)}>+</button>
+                                    {/* Increment */}
+                                    <div className="transition-all duration-300 hover:bg-gray-200 rounded-tr-sm rounded-br-sm ">
+                                        <button
+                                            className="px-3 py-2 flex items-center justify-center cursor-pointer rounded-tr-lg"
+                                            onClick={() => increment(product.id)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+
                                 </div>
                             </td>
                         </tr>
