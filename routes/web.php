@@ -14,9 +14,12 @@ Route::get('/categories', [ProductController::class, 'getCategories'])->name('ca
 Route::get('/stock', [ProductController::class, 'getProducts'])->name('stock');
 Route::get('/reports', fn() => Inertia::render('Mainpages/reports'))->name('reports');
 
-// Adding a new category
+// Adding, Editing, and Deleting a category
 Route::post('/categories', [CategoriesController::class, 'store'])->name('category.store');
+Route::put('/categories/{category}', [CategoriesController::class, 'update'])->name('category.update');
+Route::delete('/categories/{category}', [CategoriesController::class, 'destroy'])->name('category.delete');
 
 // Updating quantity
 Route::patch('/stock/update-quantities', [ProductController::class, 'updateQuantities'])->name('update-quantity');
+
 require __DIR__.'/settings.php';

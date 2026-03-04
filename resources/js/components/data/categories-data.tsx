@@ -1,10 +1,20 @@
-import { SquarePen } from "lucide-react"
-import { Trash } from "lucide-react"
+import { Link } from "@inertiajs/react"
+
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import type { Category } from "@/types/inventory"
+import DeleteCategory from "../buttons/delete-category"
+import EditCategory from "../buttons/edit-categories"
 
 type pageProps = {
-    categories: Category[]
+    categories: {
+        data: Category[]
+        links: {
+            url: string | null
+            label: string
+            active: boolean
+        }[]
+    }
 }
 
 export default function CategoriesList({categories}:pageProps) {
@@ -21,7 +31,7 @@ export default function CategoriesList({categories}:pageProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {categories.map(category => (
+                        {categories.data.map(category => (
                             <tr
                                 key={category.id}
                                 className="grid grid-cols-4 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
@@ -30,17 +40,39 @@ export default function CategoriesList({categories}:pageProps) {
                                 <td>{category.description}</td>
                                 <td>{category.products_quantity}</td>
                                 <th className="text-left flex gap-2">
-                                    <button>
-                                        <SquarePen strokeWidth={1.5} size={20} />
-                                    </button>
-                                    <button>
-                                        <Trash strokeWidth={1.5} size={20} />
-                                    </button>
+                                    <EditCategory category={category}/>
+                                    <DeleteCategory category={category} />
                                 </th>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                <div className="flex gap-2 mt-4 justify-end">
+                    {categories.links.map((link, index) => {
+                        let label: React.ReactNode = link.label;
+
+                        if (label && typeof label === "string" && label.includes("Previous")) {
+                            label = <ChevronLeft size={16} />;
+                        }
+
+                        if (label && typeof label === "string" && label.includes("Next")) {
+                            label = <ChevronRight size={16} />;
+                        }
+
+                        return (
+                            <Link
+                                key={index}
+                                href={link.url ?? ""}
+                                className={`px-3 py-1 border text-sm rounded-md ${
+                                    link.active ? "bg-gray-800 text-white" : ""
+                                } ${!link.url ? "opacity-50 pointer-events-none" : ""}`}
+                            >
+                                {label}
+                            </Link>
+                        );
+
+                    })}
+                </div>
             </div>
         </div>
     )

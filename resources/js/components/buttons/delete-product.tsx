@@ -14,9 +14,7 @@ export default function DeleteProduct({product}:pageProps) {
     const route = useRoute();
 
     const handleDelete = (productId: number) => {
-        router.delete(route('products.destroy', {product: productId}), {
-
-        })
+        router.delete(route('products.destroy', {product: productId}), {})
     }
     return (
         <button

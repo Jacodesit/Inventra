@@ -191,7 +191,7 @@ class ProductController extends Controller
             'products as products_quantity' => function ($query) use ($userId) {
                 $query->where('users_id', $userId);
             }
-        ])->get();
+        ])->paginate(6);
 
         return Inertia::render('Mainpages/categories', [
             'categories' => $categories

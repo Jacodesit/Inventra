@@ -9,7 +9,10 @@ import AddCategoriesModal from '@/components/modal/add-categories-modal';
 import type { Auth, Category } from '@/types/inventory';
 
 type pageProps = {
-    categories: Category[]
+    categories: {
+        data: Category[];
+        links: { url: string | null; label: string; active: boolean }[];
+    }
 } & Auth
 
 export default function Home({auth, categories}:pageProps) {
