@@ -41,7 +41,13 @@ export default function Home({auth, products, categories}:pageProps) {
             })
         );
 
-        router.patch("/stock/update-quantities", { quantities: changed });
+        router.patch("/stock/update-quantities", { quantities: changed }, {
+            onSuccess: () => {
+                router.reload({
+                    only: ['totalProducts','statusCounts','lowStock','noStock']
+                });
+            }
+        });
     };
 
     return (

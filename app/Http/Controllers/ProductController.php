@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 // use Illuminate\Container\Attributes\Storage;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category')
-            ->where('users_id', auth()->id())
+            ->where('users_id', Auth::id())
             ->latest()
             ->paginate(7);
 
@@ -69,7 +69,7 @@ class ProductController extends Controller
             'product_quantity' => $validated['product_quantity'],
             'product_price' => $validated['product_price'],
             'category_id' => $validated['category_id'],
-            'users_id' => auth()->id(),
+            'users_id' => Auth::id(),
         ]);
 
         return redirect('/products');
@@ -139,7 +139,7 @@ class ProductController extends Controller
             // 'product_quantity' => $validated['product_quantity'],
             'product_price' => $validated['product_price'],
             'category_id' => $validated['category_id'],
-            'users_id' => auth()->id(),
+            'users_id' => Auth::id(),
         ]);
 
         return redirect('/products');
@@ -157,25 +157,36 @@ class ProductController extends Controller
 
     public function getStatusCounts() {
         $threshold = 5;
-        $userId = auth()->id();
+        $userId = Auth::id();
         $totalProducts = Product::where('users_id', $userId)->count();
+
         $lowStock = Product::where('users_id', $userId)
-            ->where('product_quantity', '>', 0 )
+            ->where('product_quantity', '>', 0)
             ->where('product_quantity', '<=', $threshold)
             ->select('product_code', 'product_name', 'product_quantity', 'product_status')
             ->limit(6)
             ->get();
 
         $noStock = Product::where('users_id', $userId)
-            ->where('product_quantity', '=', 0)
+            ->where('product_quantity', 0)
             ->select('product_code', 'product_name', 'product_quantity', 'product_status')
             ->limit(6)
             ->get();
 
-        $statusCounts = Product::where('users_id', $userId)
-            ->select('product_status', DB::raw('count(*) as total'))
-            ->groupBy('product_status')
-            ->pluck('total', 'product_status');
+        $statusCounts = [
+            'in_stock' => Product::where('users_id', $userId)
+                ->where('product_quantity', '>', $threshold)
+                ->count(),
+
+            'low_stock' => Product::where('users_id', $userId)
+                ->where('product_quantity', '>', 0)
+                ->where('product_quantity', '<=', $threshold)
+                ->count(),
+
+            'out_of_stock' => Product::where('users_id', $userId)
+                ->where('product_quantity', 0)
+                ->count(),
+        ];
 
         return inertia('Mainpages/dashboard', [
             'totalProducts' => $totalProducts,
@@ -186,7 +197,7 @@ class ProductController extends Controller
     }
 
     public function getCategories() {
-        $userId = auth()->id();
+        $userId = Auth::id();
         $categories = Category::withCount([
             'products as products_quantity' => function ($query) use ($userId) {
                 $query->where('users_id', $userId);
@@ -200,7 +211,7 @@ class ProductController extends Controller
 
     public function getProducts() {
         $products = Product::with('category')
-            ->where('users_id', auth()->id())->latest()->paginate(5);
+            ->where('users_id', Auth::id())->latest()->paginate(5);
 
         $categories = Category::all();
 
