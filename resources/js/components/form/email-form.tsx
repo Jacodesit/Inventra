@@ -3,7 +3,7 @@ import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
 export default function EmailForm() {
     const route = useRoute();
-    const { data, setData, processing, post, errors } = useForm({
+    const { data, setData, processing, post, errors, reset } = useForm({
         email: ''
     })
 
@@ -12,6 +12,7 @@ export default function EmailForm() {
         post(route('password.email'), {
             onSuccess: () => {
                 alert('Email sent successfully!')
+                reset();
             }
         })
     }
