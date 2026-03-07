@@ -73,10 +73,10 @@ export default function Home({auth, products, categories}:pageProps) {
                             <img
                                 src='/SVG/noproduct.svg'
                                 alt='No product'
-                                className='h-50 opacity-50'
+                                className='h-70'
                             />
                         </div>
-                        <p className='text-gray-500'>No products found!</p>
+                        <p className='text-gray-500 text-sm'>No products found!</p>
                     </div>
                 ) : (
                     <StockData

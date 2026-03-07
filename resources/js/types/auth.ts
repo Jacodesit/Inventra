@@ -3,6 +3,7 @@ export type User = {
     name: string;
     email: string;
     phone_number: string;
+    business_title:string;
     address: string;
     avatar?: string;
     email_verified_at: string | null;
@@ -10,6 +11,8 @@ export type User = {
     created_at: string;
     updated_at: string;
     [key: string]: unknown;
+    password: string
+    password_confirmation: string
 };
 
 export type Auth = {

@@ -39,7 +39,7 @@ export default function Home({products, categories, auth}:PageProps) {
                             <img
                                 src='/SVG/noproduct.svg'
                                 alt='No product'
-                                className='h-50 opacity-50'
+                                className='h-70 '
                             />
                         </div>
                         <p className='text-gray-500'>No products found!</p>

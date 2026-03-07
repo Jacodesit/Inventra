@@ -6,10 +6,12 @@ import { LogIn } from 'lucide-react';
 
 import { useState } from 'react';
 
+import ResetPasswordModal from '../modal/reset-password-modal';
 import Signup from '../modal/signup-modal';
 
 export default function LoginForm() {
     const [openModal, setOpenModal] = useState(false);
+    const [openResetModal, setResetModal] = useState(false);
     const { data, post, setData, errors, processing } = useForm({
         email: '',
         password: ''
@@ -78,7 +80,7 @@ export default function LoginForm() {
                 </div>
             </form>
 
-            <div className='text-center'>
+            <div className='flex items-center gap-2 justify-center'>
                 <p className='text-xs'>No account yet?
                     <button
                         onClick={() => setOpenModal(true)}
@@ -88,12 +90,30 @@ export default function LoginForm() {
                     </button>
                     now!
                 </p>
+
+                <p>|</p>
+
+                <button
+                    onClick={() => setResetModal(true)}
+                    className='text-xs transition-all duration-300 hover:text-red-800 cursor-pointer'
+                >
+                    Forgot Password
+                </button>
+            </div>
+
+            <div className='flex justify-end mt-1'>
+
             </div>
 
 
             <Signup
                 openModal={openModal}
                 onClose={() => setOpenModal(false)}
+            />
+
+            <ResetPasswordModal
+                openResetModal={openResetModal}
+                closeModal={() => setResetModal(false)}
             />
         </div>
     )

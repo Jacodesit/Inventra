@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -22,4 +24,9 @@ Route::delete('/categories/{category}', [CategoriesController::class, 'destroy']
 // Updating quantity
 Route::patch('/stock/update-quantities', [ProductController::class, 'updateQuantities'])->name('update-quantity');
 
+// Editing user details
+Route::patch('/settings/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+// Updating user password
+Route::patch('/settings/password', [PasswordController::class, 'update'])->name('settings.password.update')->middleware('auth');
 require __DIR__.'/settings.php';

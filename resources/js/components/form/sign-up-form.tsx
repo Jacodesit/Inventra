@@ -143,10 +143,10 @@ export default function SignUpForm() {
                     </div>
                 </div>
 
-                <div className="flex justify-end text-sm">
+                <div className="flex justify-end text-sm pt-5">
                     <button
                         disabled={processing}
-                        className="px-6 py-2 border rounded transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer"
+                        className="px-6 py-2 border rounded transition-all duration-300 hover:bg-gray-800 hover:text-white cursor-pointer text-sm"
                     >
                         {processing ? 'Signing Up...' : 'Sign Up'}
                     </button>
