@@ -209,13 +209,25 @@ class ProductController extends Controller
         ]);
     }
 
-    public function getProducts() {
+    public function getProductsForStock() {
         $products = Product::with('category')
             ->where('users_id', Auth::id())->latest()->paginate(5);
 
         $categories = Category::all();
 
         return inertia::render('Mainpages/stock', [
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+
+    public function getProductsForSales() {
+        $products = Product::with('category')
+            ->where('users_id', Auth::id())->latest()->get();
+
+        $categories = Category::all();
+
+        return inertia::render('Mainpages/sales', [
             'products' => $products,
             'categories' => $categories
         ]);

@@ -32,10 +32,10 @@ export default function AddProductForm({categories, onClose}:pageProps) {
 
     return (
         <div className='flex flex-col gap-10'>
-            <form className='' onSubmit={submit}>
+            <form onSubmit={submit}>
                 {/* Product */}
                 <div className="flex flex-col gap-2 px-4 py-3">
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-2 gap-3">
                         <div className="text-sm flex flex-col gap-1">
                             <label htmlFor="product_name" className="font-medium text-xs">Name</label>
                             <input

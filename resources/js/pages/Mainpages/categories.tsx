@@ -15,7 +15,7 @@ type pageProps = {
     }
 } & Auth
 
-export default function Home({auth, categories}:pageProps) {
+export default function Categories({auth, categories}:pageProps) {
     const [openModal, setOpenModal] = useState(false);
     return (
         <Layout>

@@ -2,6 +2,7 @@ import { Link } from "@inertiajs/react"
 
 import { Blocks } from '../../../../components/animate-ui/icons/blocks';
 import { ChartBar } from '../../../../components/animate-ui/icons/chart-bar';
+import { ChartSpline } from '../../../../components/animate-ui/icons/chart-spline';
 import { Layers } from '../../../../components/animate-ui/icons/layers';
 import { LayoutDashboard } from '../../../../components/animate-ui/icons/layout-dashboard';
 import { MessageSquareText } from '../../../../components/animate-ui/icons/message-square-text';
@@ -20,6 +21,7 @@ export default function SidebarLinks({openSidebar}:pageProps) {
         { name: 'Products', icon: <Blocks animateOnHover size={18} />, href: '/products', title: 'Products' },
         { name: 'Categories', icon: <Layers animateOnHover size={18} />, href: '/categories', title: 'Categories' },
         { name: 'Stock', icon: <ChartBar animateOnHover size={18} />, href: '/stock', title: 'Stock' },
+        { name: 'Sales', icon: <ChartSpline animateOnHover size={18} />, href: '/sales', title: 'Sales' },
         { name: 'Reports', icon: <MessageSquareText animateOnHover size={18} />, href: '/reports', title: 'Reports' },
     ]
 
