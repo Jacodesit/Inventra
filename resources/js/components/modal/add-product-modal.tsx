@@ -3,6 +3,7 @@ import type { Category } from "@/types/inventory";
 import AddProductForm from "../form/add-product-form";
 import AddProductHeading from "../headings/add-product-modal-heading";
 
+
 type pageProps = {
     openModal: boolean
     onClose: () => void;

@@ -1,6 +1,6 @@
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
-
+import { toast } from 'react-hot-toast';
 import StockData from '@/components/data/stock-data';
 import Layout from '@/components/layout/main-layout';
 
@@ -46,6 +46,7 @@ export default function Home({auth, products, categories}:pageProps) {
                 router.reload({
                     only: ['totalProducts','statusCounts','lowStock','noStock']
                 });
+                toast.success('Stock quantities updated successfully!');
             }
         });
     };

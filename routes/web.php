@@ -5,10 +5,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
-Route::get('/', fn() => Inertia::render('welcome'));
+Route::get('/', fn() => Inertia::render('welcome'))->name('welcome');
 Route::resource('products', ProductController::class)->except('index');
 Route::get('/dashboard', [ProductController::class, 'getStatusCounts'])->name('dashboard');
 Route::get('/products', [ProductController::class, 'index'])->name('products');
@@ -27,6 +28,15 @@ Route::patch('/stock/update-quantities', [ProductController::class, 'updateQuant
 // Editing user details
 Route::patch('/settings/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-// Updating user password
+// Updating or changing user password
 Route::patch('/settings/password', [PasswordController::class, 'update'])->name('settings.password.update')->middleware('auth');
+
+// Resetting a forgot password
+Route::post('/reset-password/{token}', function (Request $request, $token) {
+    return Inertia::render('auth/reset-password', [
+        'token' => $token,
+        'email' => $request->email,
+    ]);
+})->name('password.update');
+
 require __DIR__.'/settings.php';

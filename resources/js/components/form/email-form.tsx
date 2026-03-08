@@ -1,4 +1,5 @@
 import { useForm } from "@inertiajs/react"
+import toast from "react-hot-toast";
 import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
 export default function EmailForm() {
@@ -11,8 +12,9 @@ export default function EmailForm() {
         e.preventDefault()
         post(route('password.email'), {
             onSuccess: () => {
-                alert('Email sent successfully!')
+                toast.success('Password reset link sent! Please check your email.');
                 reset();
+
             }
         })
     }
@@ -20,7 +22,7 @@ export default function EmailForm() {
     return (
         <div>
             <form onSubmit={submit} className="flex flex-col gap-2 px-4 py-3">
-                <div className="text-sm flex flex-col gap-1">
+                <div className="flex flex-col gap-1">
                     <label htmlFor="product_name" className="font-medium text-xs">Email</label>
                     <input
                         type="email"

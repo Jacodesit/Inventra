@@ -1,6 +1,6 @@
 import { router } from "@inertiajs/react"
+import toast from "react-hot-toast";
 import { logout } from "@/routes";
-
 import { CircleX } from "../../../../components/animate-ui/icons/circle-x";
 
 type pageProps = {
@@ -12,7 +12,11 @@ export default function LogoutDialog({openDialog, onClose}:pageProps) {
     if(!openDialog) return null
 
     const handleLogout = () => {
-        router.visit(logout());
+        router.visit(logout(), {
+            onSuccess: () => {
+                toast.success('Logged out successfully!');
+            }
+        });
     }
     return (
         <div className="fixed inset-0 bg-black/80 bg-opacity-50 flex items-center justify-center p-4 z-500">

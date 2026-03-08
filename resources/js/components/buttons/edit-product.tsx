@@ -1,5 +1,4 @@
 import { SquarePen } from "lucide-react"
-
 import { useState } from "react"
 
 import type { Product } from "@/types/inventory"

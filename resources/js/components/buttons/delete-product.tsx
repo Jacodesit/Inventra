@@ -1,7 +1,6 @@
 import { router } from "@inertiajs/react"
-
 import { Trash } from "lucide-react"
-
+import { toast } from 'react-hot-toast';
 import type { Product } from "@/types/inventory"
 import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
@@ -14,7 +13,11 @@ export default function DeleteProduct({product}:pageProps) {
     const route = useRoute();
 
     const handleDelete = (productId: number) => {
-        router.delete(route('products.destroy', {product: productId}), {})
+        router.delete(route('products.destroy', {product: productId}), {
+            onSuccess: () => {
+                toast.success('Product deleted successfully!');
+            }
+        })
     }
     return (
         <button

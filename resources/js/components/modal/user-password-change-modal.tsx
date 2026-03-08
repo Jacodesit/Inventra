@@ -8,7 +8,7 @@ type pageProps = {
     auth: Auth
 }
 
-export default function PasswordModal({openPasswordModal, closeModal, auth}:pageProps) {
+export default function PasswordModal({openPasswordModal, closeModal}:pageProps) {
     if(!openPasswordModal) return null
     return (
         <main
@@ -19,7 +19,7 @@ export default function PasswordModal({openPasswordModal, closeModal, auth}:page
                 className="bg-slate-100 rounded-lg max-w-xl w-full flex flex-col relative px-8 py-5 "
             >
                 <PasswordChangeHeading closeModal={closeModal} />
-                <PasswordForm auth={auth} closeModal={closeModal}/>
+                <PasswordForm closeModal={closeModal}/>
             </div>
         </main>
     )

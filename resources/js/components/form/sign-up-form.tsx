@@ -1,4 +1,5 @@
 import { useForm } from "@inertiajs/react";
+import { toast } from "react-hot-toast";
 
 export default function SignUpForm() {
     const { data, post, setData, errors, processing} = useForm({
@@ -13,7 +14,11 @@ export default function SignUpForm() {
 
     const submit = (e:React.FormEvent) => {
         e.preventDefault();
-        post('/register');
+        post('/register', {
+            onSuccess: () => {
+                toast.success('Account created successfully! You can now log in with your new account.');
+            }
+        });
     }
 
     return (

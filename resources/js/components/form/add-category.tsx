@@ -1,4 +1,5 @@
 import { useForm } from "@inertiajs/react"
+import { toast } from 'react-hot-toast';
 
 type pageProps = {
     onClose: () => void
@@ -15,6 +16,7 @@ export default function AddCategoryForm({onClose}:pageProps) {
         post('/categories', {
             onSuccess: () => {
                 onClose();
+                toast.success('Category added successfully!');
             }
         });
     }

@@ -1,11 +1,9 @@
 import { useForm } from '@inertiajs/react';
-
 import { Mail } from 'lucide-react';
 import { FileLock } from 'lucide-react';
 import { LogIn } from 'lucide-react';
-
 import { useState } from 'react';
-
+import { toast } from 'react-hot-toast';
 import ResetPasswordModal from '../modal/reset-password-modal';
 import Signup from '../modal/signup-modal';
 
@@ -19,7 +17,11 @@ export default function LoginForm() {
 
     const submit = (e:React.FormEvent) => {
         e.preventDefault();
-        post('/login');
+        post('/login', {
+            onSuccess: () => {
+                toast.success('Logged in successfully!');
+            }
+        });
     }
     return (
         <div className='flex flex-col gap-10'>
@@ -95,7 +97,7 @@ export default function LoginForm() {
 
                 <button
                     onClick={() => setResetModal(true)}
-                    className='text-xs transition-all duration-300 hover:text-red-800 cursor-pointer'
+                    className='text-xs transition-all duration-300 text-red-500 cursor-pointer hover:underline'
                 >
                     Forgot Password
                 </button>

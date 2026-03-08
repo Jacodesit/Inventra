@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/react"
-
+import { toast } from 'react-hot-toast';
 import type { Category } from "@/types/inventory"
 import type { ProductForm } from "@/types/inventory"
 
@@ -25,6 +25,7 @@ export default function AddProductForm({categories, onClose}:pageProps) {
             forceFormData: true,
             onSuccess: () => {
                 onClose();
+                toast.success('Product added successfully');
             }
         });
     }

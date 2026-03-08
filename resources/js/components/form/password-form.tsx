@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/react"
-// import type { Auth } from "@/types"
+import { toast } from 'react-hot-toast';
 import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
 type pageProps = {
@@ -19,7 +19,8 @@ export default function PasswordForm({closeModal}:pageProps) {
         e.preventDefault()
         patch(route('settings.password.update'), {
             onSuccess: () => {
-                closeModal()
+                closeModal();
+                toast.success('Password updated successfully!');
             }
         })
     }

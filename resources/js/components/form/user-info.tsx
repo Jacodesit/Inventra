@@ -1,4 +1,5 @@
 import { useForm } from "@inertiajs/react"
+import { toast } from 'react-hot-toast';
 import type { Auth } from "@/types"
 import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
@@ -23,6 +24,7 @@ export default function UserInfoForm({auth, closeModal}:pageProps) {
         patch(route('profile.update'), {
             onSuccess: () => {
                 closeModal();
+                toast.success('Profile updated successfully!');
             }
         })
     }

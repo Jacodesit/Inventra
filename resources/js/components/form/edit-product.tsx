@@ -1,9 +1,8 @@
 import { useForm } from "@inertiajs/react"
-
+import { toast } from 'react-hot-toast';
 import type { Product } from "@/types/inventory"
 import type { Category } from "@/types/inventory"
 import type { ProductForm } from "@/types/inventory"
-
 import { CircleX } from "../../../../components/animate-ui/icons/circle-x";
 import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
@@ -30,6 +29,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
         put(route('products.update', {product: product.id}), {
             onSuccess: () => {
                 onClose();
+                toast.success('Product updated successfully!');
             }
         })
     }

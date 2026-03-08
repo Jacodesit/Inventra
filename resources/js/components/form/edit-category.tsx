@@ -1,6 +1,6 @@
 import { useForm } from "@inertiajs/react"
+import { toast } from 'react-hot-toast';
 import type { Category } from "@/types/inventory"
-
 import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
 type pageProps = {
@@ -21,6 +21,7 @@ export default function EditCategoryForm({category, onClose}:pageProps) {
         put(route('category.update', {category: category.id}), {
             onSuccess: () => {
                 onClose()
+                toast.success('Category updated successfully!');
             }
         })
     }

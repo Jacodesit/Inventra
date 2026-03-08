@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Toaster } from 'react-hot-toast';
 import Sidebar from "../sidebar/sidebar"
 import HeaderLayout from "./header-layout";
 
@@ -25,6 +26,7 @@ export default function Layout({children}:PageProps) {
                 setOpenSidebar={handleToggle}
             />
             <main className="flex-1 ">
+                <Toaster position="top-right" />
                 <HeaderLayout />
                 <div className="max-h-[calc(100vh-24px)] p-6">
                     {children}
