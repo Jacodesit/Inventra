@@ -48,14 +48,14 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                     value={data.product_name}
                                     onChange={(e) => setData('product_name', e.target.value)}
                                     placeholder="Product Name"
-                                    className="border w-full p-2.5 rounded text-xs"
+                                    className="input-field"
                                 />
                                 {errors.product_name && <p className="errors text-red-800 text-xs">{errors.product_name}</p>}
                             </div>
 
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="product_quantity" className="font-medium text-xs">Quantity</label>
-                                <div className="border p-2.5 rounded">
+                                <div className="w-full rounded-md px-4 py-3.5 text-sm border-0 bg-white/50 backdrop-blur-sm placeholder:text-gray-400 text-gray-700 transition-all duration-200 shadow-sm hover:ring-gray-300 [-moz-appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ">
                                     <p className="text-xs">{product.product_quantity}</p>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                     value={data.product_quantity}
                                     onChange={(e) => setData('product_quantity', Number(e.target.value))}
                                     placeholder="Product Quantity"
-                                    className="border w-full p-2.5 rounded text-xs"
+                                    className="input-field"
                                 />
                                 {errors.product_quantity && <p className="errors text-red-800 text-xs">{errors.product_quantity}</p>}
                             </div> */}
@@ -83,7 +83,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                     value={data.product_price}
                                     onChange={(e) => setData('product_price', Number(e.target.value))}
                                     placeholder="Product Price"
-                                    className="border w-full p-2.5 rounded text-xs"
+                                    className="input-field"
                                 />
                                 {errors.product_price && <p className="errors text-red-800 text-xs">{errors.product_price}</p>}
                             </div>
@@ -96,7 +96,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                     value={data.category_id}
                                     onChange={(e) => setData('category_id', Number(e.target.value))}
 
-                                    className="border w-full p-2.5 rounded text-xs "
+                                    className="input-field "
                                 >
                                     <option value="" disabled>
                                         Select category
@@ -123,7 +123,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                     type="file"
                                     accept="image"
                                     onChange={(e) => setData('product_image', e.target.files ? e.target.files[0] : null)}
-                                    className="border w-full p-2.5 rounded text-xs"
+                                    className="input-field"
                                 />
                                 {errors.product_image && <p className="errors text-red-800 text-xs">{errors.product_image}</p>}
                             </div>
@@ -164,7 +164,7 @@ export default function EditProductForm({categories, product, onClose}:pageProps
                                     value={data.product_description}
                                     onChange={(e) => setData('product_description', e.target.value)}
                                     placeholder="Product Description"
-                                    className="border w-full p-2.5 rounded resize-none text-xs"
+                                    className="input-field"
                                 >
                                 </textarea>
                                 {errors.product_description && <p className="errors text-red-800 text-xs">{errors.product_description}</p>}

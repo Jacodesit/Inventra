@@ -35,12 +35,12 @@ export default function SignUpForm() {
                         type="text"
                         value={data.business_title}
                         onChange={(e) => setData('business_title', e.target.value)}
-                        className="border w-full p-2.5 rounded text-xs"
+                        className="input-field"
                     />
                     {errors.business_title && <p className="errors text-xs text-red-700">{errors.business_title}</p>}
                 </div>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1">
                         <label
                             htmlFor="name"
@@ -53,7 +53,7 @@ export default function SignUpForm() {
                             value={data.name}
                             onChange={(e) => setData('name', e.target.value)}
                             placeholder="John Doe"
-                            className="border w-full p-2.5 rounded text-xs"
+                            className="input-field"
                         />
                         {errors.name && <p className="errors text-xs text-red-700">{errors.name}</p>}
                     </div>
@@ -70,13 +70,13 @@ export default function SignUpForm() {
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder="johndoe@gmail.com"
-                            className="border w-full p-2.5 rounded text-xs"
+                            className="input-field"
                         />
                         {errors.email && <p className="errors text-xs text-red-700">{errors.email}</p>}
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1">
                         <label
                             htmlFor="phone_number"
@@ -89,7 +89,7 @@ export default function SignUpForm() {
                             value={data.phone_number}
                             onChange={(e) => setData('phone_number', e.target.value)}
                             placeholder="09123456789"
-                            className="border w-full p-2.5 rounded text-xs"
+                            className="input-field"
                         />
                         {errors.phone_number && <p className="errors text-xs text-red-700">{errors.phone_number}</p>}
                     </div>
@@ -106,13 +106,13 @@ export default function SignUpForm() {
                             value={data.address}
                             onChange={(e) => setData('address', e.target.value)}
                             placeholder="Barangay, Municipality, Province"
-                            className="border w-full p-2.5 rounded text-xs"
+                            className="input-field"
                         />
                         {errors.address && <p className="errors text-xs text-red-700">{errors.address}</p>}
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                     <div className="flex flex-col gap-1">
                         <label
                             htmlFor="password"
@@ -125,7 +125,7 @@ export default function SignUpForm() {
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
                             placeholder="Enter password"
-                            className="border w-full p-2.5 rounded text-xs"
+                            className="input-field"
                         />
                         {errors.password && <p className="errors text-xs text-red-700">{errors.password}</p>}
                     </div>
@@ -142,7 +142,7 @@ export default function SignUpForm() {
                             value={data.password_confirmation}
                             onChange={(e) => setData('password_confirmation', e.target.value)}
                             placeholder="Confirm password"
-                            className="border w-full p-2.5 rounded text-xs"
+                            className="input-field"
                         />
                         {errors.password_confirmation && <p className="errors text-xs text-red-700">{errors.password_confirmation}</p>}
                     </div>

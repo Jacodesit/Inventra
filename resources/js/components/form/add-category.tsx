@@ -30,9 +30,9 @@ export default function AddCategoryForm({onClose}:pageProps) {
                         type="text"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
-                        className="border w-full p-2.5 rounded text-xs"
+                        className="input-field"
                     />
-                    {errors.name && <p className="errors text-red-800 text-xs">{errors.name}</p>}
+                    {errors.name && <p className="errors text-red-500 text-xs">{errors.name}</p>}
                 </div>
                 <div>
                     <label htmlFor="description" className="font-medium text-xs">Description</label>
@@ -42,7 +42,7 @@ export default function AddCategoryForm({onClose}:pageProps) {
                         onChange={(e) => setData('description', e.target.value)}
                         name="description"
                         id="description"
-                        className="border w-full p-2.5 rounded resize-none text-xs"
+                        className="input-field text-xs"
                     ></textarea>
                     {errors.description && <p className="errors text-red-500 text-xs">{errors.description}</p>}
                 </div>

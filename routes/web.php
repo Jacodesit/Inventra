@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -39,5 +40,8 @@ Route::post('/reset-password/{token}', function (Request $request, $token) {
         'email' => $request->email,
     ]);
 })->name('password.update');
+
+// Adding sales
+Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
 
 require __DIR__.'/settings.php';
