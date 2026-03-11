@@ -16,7 +16,7 @@ Route::get('/dashboard', [ProductController::class, 'getStatusCounts'])->name('d
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/categories', [ProductController::class, 'getCategories'])->name('categories');
 Route::get('/stock', [ProductController::class, 'getProductsForStock'])->name('stock');
-Route::get('/sales', [ProductController::class, 'getProductsForSales'])->name('sales');
+// Route::get('/sales', [ProductController::class, 'getProductsForSales'])->name('sales');
 Route::get('/reports', fn() => Inertia::render('Mainpages/reports'))->name('reports');
 
 // Adding, Editing, and Deleting a category
@@ -44,4 +44,6 @@ Route::post('/reset-password/{token}', function (Request $request, $token) {
 // Adding sales
 Route::post('/sales', [SaleController::class, 'store'])->name('sales.store');
 
+// Fetching sales
+Route::get('/sales', action: [SaleController::class, 'index'])->name('sales.index');
 require __DIR__.'/settings.php';

@@ -29,6 +29,15 @@ export type Product = {
     } | null
 }
 
+export type Sale = {
+    id: number;
+    product_id: number;
+    quantity: number;
+    price: number;
+    total: number;
+    created_at: string;
+}
+
 export type Auth = {
     auth: {
         user: {

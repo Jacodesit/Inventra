@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SalesData from "@/components/data/sales-data";
 import Layout from "@/components/layout/main-layout";
 import SalesModal from "@/components/modal/add-sales-modal";
 import type { Auth, Product } from "@/types/inventory";
@@ -25,6 +26,7 @@ export default function Sales({auth, products}:pageProps) {
                         Add Sales
                     </button>
                 </div>
+                <SalesData />
             </div>
             <SalesModal
                 products={products}

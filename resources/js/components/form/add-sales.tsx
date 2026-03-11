@@ -1,5 +1,6 @@
 import { useForm } from "@inertiajs/react"
 import { useState } from "react"
+import toast from "react-hot-toast"
 import type { Product } from "@/types/inventory"
 import { useRoute } from '../../../../vendor/tightenco/ziggy'
 
@@ -48,6 +49,7 @@ export default function SalesForm({ products, onClose }: pageProps) {
             onSuccess: () => {
                 reset()
                 onClose()
+                toast.success('Sale added successfully and quantity updated!')
             }
         })
     }

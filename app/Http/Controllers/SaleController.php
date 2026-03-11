@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Inertia\Inertia;
 
 class SaleController extends Controller
 {
@@ -15,7 +16,12 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        $sales = Sale::where('user_id', Auth::id())->latest()->get();
+
+        return inertia::render('Mainpages/sales', [
+            'sales' => $sales
+        ]);
+
     }
 
     /**
@@ -46,7 +52,7 @@ class SaleController extends Controller
         $product = Product::findOrFail($validated['product_id']);
 
         // Prevent selling more than available stock
-        if ($validated['quantity'] > $product->quantity) {
+        if ($validated['quantity'] > $product->product_quantity) {
             return back()->withErrors([
                 'quantity' => 'Not enough stock available.'
             ]);
@@ -62,7 +68,7 @@ class SaleController extends Controller
         ]);
 
         // Reduce product stock
-        $product->quantity -= $validated['quantity'];
+        $product->product_quantity -= $validated['quantity'];
         $product->save();
 
         return redirect('/sales');
