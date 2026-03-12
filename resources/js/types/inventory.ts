@@ -36,6 +36,7 @@ export type Sale = {
     price: number;
     total: number;
     created_at: string;
+    product: Product
 }
 
 export type Auth = {

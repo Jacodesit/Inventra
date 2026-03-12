@@ -50,6 +50,10 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function sales() {
+        return $this->hasMany(Sale::class);
+    }
+
     public function getStockAttribute() {
         if($this->product_quantity <= 0) return 'Out of Stock';
         if($this->product_quantity <= 5) return 'Low Stock';

@@ -16,10 +16,12 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::where('user_id', Auth::id())->latest()->get();
+        $sales = Sale::with('product')->where('user_id', Auth::id())->latest()->get();
+        $products = Product::where('users_id', Auth::id())->get();
 
         return inertia::render('Mainpages/sales', [
-            'sales' => $sales
+            'sales' => $sales,
+            'products' => $products
         ]);
 
     }

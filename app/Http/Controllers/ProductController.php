@@ -24,11 +24,9 @@ class ProductController extends Controller
             ->where('users_id', Auth::id())
             ->latest()
             ->paginate(7);
-        $sales = Sale::where('users_id', Auth::id())->latest();
         $categories = Category::all();
 
         return Inertia::render('Mainpages/products', [
-            'sales' => $sales,
             'products' => $products,
             'categories' => $categories
         ]);

@@ -1,4 +1,5 @@
 import { usePage } from "@inertiajs/react"
+import { PhilippinePeso } from "lucide-react"
 import type { Sale } from "@/types/inventory"
 
 type pageProps = {
@@ -12,8 +13,9 @@ export default function SalesData() {
             <div className="mt-5 flex flex-col justify-between h-[75vh]">
                 <table className="w-full border-collapse">
                     <thead className="bg-sidebar-color text-white">
-                        <tr className="grid grid-cols-6 text-left p-5">
-                            <th>ID</th>
+                        <tr className="grid grid-cols-7 text-left p-5">
+                            <th>Sale ID</th>
+                            <th>Product Name</th>
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Price</th>
@@ -25,14 +27,21 @@ export default function SalesData() {
                         {sales.map(sale => (
                             <tr
                                 key={sale.id}
-                                className="grid grid-cols-6 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
+                                className="grid grid-cols-7 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
                             >
                                 <td>{sale.id}</td>
+                                <td>{sale.product?.product_name}</td>
                                 <td>{sale.product_id}</td>
                                 <td>{sale.quantity}</td>
-                                <td>{sale.price}</td>
-                                <td>{sale.total}</td>
-                                <td>{sale.created_at}</td>
+                                <td className='flex items-center'><PhilippinePeso size={15} />{sale.price}</td>
+                                <td className='flex items-center'><PhilippinePeso size={15} />{sale.total}</td>
+                                {new Date(sale.created_at).toLocaleString('en-US',{
+                                    year:'numeric',
+                                    month:'short',
+                                    day:'numeric',
+                                    hour:'2-digit',
+                                    minute:'2-digit'
+                                })}
                             </tr>
                         ))}
                     </tbody>
