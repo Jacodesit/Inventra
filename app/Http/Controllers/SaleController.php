@@ -16,7 +16,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sales = Sale::with('product')->where('user_id', Auth::id())->latest()->get();
+        $sales = Sale::with('product')->where('user_id', Auth::id())->latest()->paginate(7);
         $products = Product::where('users_id', Auth::id())->get();
 
         return inertia::render('Mainpages/sales', [

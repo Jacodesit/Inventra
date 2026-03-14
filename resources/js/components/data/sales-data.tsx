@@ -1,9 +1,16 @@
-import { usePage } from "@inertiajs/react"
-import { PhilippinePeso } from "lucide-react"
+import { usePage, Link } from "@inertiajs/react"
+import { PhilippinePeso, ChevronLeft, ChevronRight } from "lucide-react"
 import type { Sale } from "@/types/inventory"
 
 type pageProps = {
-    sales: Sale[]
+    sales: {
+            data: Sale[]
+            links: {
+                url: string | null
+                label: string
+                active: boolean
+            }[]
+        }
 }
 
 export default function SalesData() {
@@ -24,7 +31,7 @@ export default function SalesData() {
                         </tr>
                     </thead>
                     <tbody>
-                        {sales.map(sale => (
+                        {sales.data.map(sale => (
                             <tr
                                 key={sale.id}
                                 className="grid grid-cols-7 text-sm border-b p-5 odd:bg-gray-100 even:bg-white"
@@ -46,6 +53,32 @@ export default function SalesData() {
                         ))}
                     </tbody>
                 </table>
+                <div className="flex gap-2 mt-4 justify-end">
+                    {sales.links.map((link, index) => {
+                        let label: React.ReactNode = link.label;
+
+                        if (label && typeof label === "string" && label.includes("Previous")) {
+                            label = <ChevronLeft size={16} />;
+                        }
+
+                        if (label && typeof label === "string" && label.includes("Next")) {
+                            label = <ChevronRight size={16} />;
+                        }
+
+                        return (
+                            <Link
+                                key={index}
+                                href={link.url ?? ""}
+                                className={`px-3 py-1 border text-sm rounded-md ${
+                                    link.active ? "bg-gray-800 text-white" : ""
+                                } ${!link.url ? "opacity-50 pointer-events-none" : ""}`}
+                            >
+                                {label}
+                            </Link>
+                        );
+
+                    })}
+                </div>
             </div>
         </div>
     )
